@@ -1,0 +1,216 @@
+import React from 'react'
+
+export const Appointment = () => {
+  return (
+    <>
+      <div>
+        <section className='mainSection'>
+          <div className="container">
+            <div className="mainSectionWrapper">
+              <div className="heading">
+                <p>
+                  Add Doctor
+                </p>
+              </div>
+              <div className="card cardForm">
+                <div className="card-body">
+                  <div className="doctorAppointments">
+                    <input className="radio" id="one" name="group" type="radio" defaultChecked />
+                    <input className="radio" id="two" name="group" type="radio" />
+
+                    <div className="tabs">
+                      <label className="tab" id="one-tab" htmlFor="one">Appointment</label>
+                      <label className="tab" id="two-tab" htmlFor="two">History</label>
+                    </div>
+                    <div className="panels">
+                      <div className="panel" id="one-panel">
+                        <div className="list-group">
+                          <a className="list-group-item list-group-item-action">
+                            <div className="rewardList">
+
+                              <div className=" w-100">
+                                <h5 className="mb-1">Patient Name</h5>
+                                <p className="mb-1">Booking Details comes here</p>
+                              </div>
+                            </div>
+                            <small>10:10 - 04/04/2022</small>
+                            <div className="metaDatasDiv">
+                              <div>
+                                <p className="metaData"> Appointment Type: Online</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Location: Karachi</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Payment Details: Cash</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Price: 1200 Rs</p>
+                              </div>
+                            </div>
+                            <div className="metaButtons">
+                              <button className="acceptButton">Accept</button>
+                              <button className="rejectButton">Reject</button>
+                            </div>
+                          </a>
+                          <a className="list-group-item list-group-item-action">
+                            <div className="rewardList">
+
+                              <div className=" w-100">
+                                <h5 className="mb-1">Patient Name</h5>
+                                <p className="mb-1">Booking Details comes here</p>
+                              </div>
+                            </div>
+                            <small>10:10 - 04/04/2022</small>
+                            <div className="metaDatasDiv">
+                              <div>
+                                <p className="metaData"> Appointment Type: Online</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Location: Karachi</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Payment Details: Cash</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Price: 1200 Rs</p>
+                              </div>
+                            </div>
+                            <div className="metaButtons">
+                              <button className="acceptButton">Accept</button>
+                              <button className="rejectButton">Reject</button>
+                            </div>
+                          </a>
+                          <a className="list-group-item list-group-item-action">
+                            <div className="rewardList">
+
+                              <div className=" w-100">
+                                <h5 className="mb-1">Patient Name</h5>
+                                <p className="mb-1">Booking Details comes here</p>
+                              </div>
+                            </div>
+                            <small>10:10 - 04/04/2022</small>
+                            <div className="metaDatasDiv">
+                              <div>
+                                <p className="metaData"> Appointment Type: Online</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Location: Karachi</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Payment Details: Cash</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Price: 1200 Rs</p>
+                              </div>
+                            </div>
+                            <div className="metaButtons">
+                              <button className="acceptButton">Accept</button>
+                              <button className="rejectButton">Reject</button>
+                            </div>
+                          </a>
+
+                        </div>
+                      </div>
+                      <div className="panel" id="two-panel">
+
+                        <div className="list-group">
+                          <a className="list-group-item list-group-item-action">
+                            <div className="rewardList">
+
+                              <div className=" w-100">
+                                <h5 className="mb-1">Patient Name</h5>
+                                <p className="mb-1">Booking Details comes here</p>
+                              </div>
+                            </div>
+                            <small>10:10 - 04/04/2022</small>
+                            <div className="metaDatasDiv">
+                              <div>
+                                <p className="metaData"> Appointment Type: Online</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Location: Karachi</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Payment Details: Cash</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Price: 1200 Rs</p>
+                              </div>
+                            </div>
+                            <div className="metaButtons">
+                              <button className="acceptButton">Accept</button>
+                              <button className="rejectButton">Reject</button>
+                            </div>
+                          </a>
+                          <a className="list-group-item list-group-item-action">
+                            <div className="rewardList">
+
+                              <div className=" w-100">
+                                <h5 className="mb-1">Patient Name</h5>
+                                <p className="mb-1">Booking Details comes here</p>
+                              </div>
+                            </div>
+                            <small>10:10 - 04/04/2022</small>
+                            <div className="metaDatasDiv">
+                              <div>
+                                <p className="metaData"> Appointment Type: Online</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Location: Karachi</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Payment Details: Cash</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Price: 1200 Rs</p>
+                              </div>
+                            </div>
+                            <div className="metaButtons">
+                              <button className="acceptButton">Accept</button>
+                              <button className="rejectButton">Reject</button>
+                            </div>
+                          </a>
+                          <a className="list-group-item list-group-item-action">
+                            <div className="rewardList">
+
+                              <div className=" w-100">
+                                <h5 className="mb-1">Patient Name</h5>
+                                <p className="mb-1">Booking Details comes here</p>
+                              </div>
+                            </div>
+                            <small>10:10 - 04/04/2022</small>
+                            <div className="metaDatasDiv">
+                              <div>
+                                <p className="metaData"> Appointment Type: Online</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Location: Karachi</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Payment Details: Cash</p>
+                              </div>
+                              <div>
+                                <p className="metaData"> Price: 1200 Rs</p>
+                              </div>
+                            </div>
+                            <div className="metaButtons">
+                              <button className="acceptButton">Accept</button>
+                              <button className="rejectButton">Reject</button>
+                            </div>
+                          </a>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
+  )
+}
