@@ -138,9 +138,11 @@ a {
                     color: #aa97b0;
                 }
             }
+
             .nav-content {
                 list-style: none;
                 padding-left: 4rem;
+
                 a {
                     display: flex;
                     align-items: center;
@@ -149,7 +151,7 @@ a {
                     color: #e92b2bce;
                     padding: 10px 0 10px 10px;
                     transition: all 0.3s;
-    
+
                     i {
                         font-size: 15px;
                         margin-right: 8px;
@@ -157,9 +159,9 @@ a {
                         border-radius: 50%;
                     }
                 }
-    
+
             }
-    
+
             .li {
                 padding: 0;
                 margin: 0;
@@ -349,6 +351,7 @@ header {
                     .profileImage {
                         display: flex;
                         justify-content: center;
+
                         img {
                             width: 150px;
                             object-fit: cover;
@@ -356,6 +359,7 @@ header {
                             border: 5px solid white;
                         }
                     }
+
                     label {
                         display: block;
                     }
@@ -488,6 +492,34 @@ header {
                     }
                 }
             }
+
+            .chart {
+                .chartHeading {
+                    p {
+                        font-size: 20px;
+                        color: #e92b2b;
+                        font-weight: 600;
+                    }
+
+                    small {
+                        color: grey;
+                    }
+                }
+
+                .box {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 80px;
+
+                    .details {
+                        .category {
+                            color: #f13e3e;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
         }
 
         .doctorAppointments {
@@ -571,10 +603,12 @@ header {
                         border-radius: 5px;
                         border: 1px solid rgba(202, 0, 0, 0.5);
                     }
-                    .list-group{
-                        .list-group-item{
+
+                    .list-group {
+                        .list-group-item {
                             position: relative;
-                            small{
+
+                            small {
                                 position: absolute;
                                 top: 10px;
                                 right: 10px;
