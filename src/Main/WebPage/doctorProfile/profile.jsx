@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import profilePic from '../../../assets/images/guy.png'
+import DoctorService from '../../../services/doctorService';
+import TokenService from '../../../services/tokenService';
 
 export const Profile = () => {
+    const { getDoctorSingle } = DoctorService();
+    const { getStorageData } = TokenService();
+    const userType = getStorageData();
+    const [doctorProfile, setDoctorProfile] = useState();
+
+    useEffect(()=>{
+        getDoctorSingle(userType.id).then((res) => {
+            setDoctorProfile(res?.data?.data)
+        }).catch((error) => {
+            console.log(error)
+        },[doctorProfile])
+      
+    })
     return (
         <>
                <section className='mainSection'>
@@ -33,32 +48,32 @@ export const Profile = () => {
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorName">Name</label>
-                                                <p className='fixedValue'>Name</p>
+                                                <p className='fixedValue'>{doctorProfile[0]?.fullname}</p>
                                                 
                                             </div>
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorEmail">Email</label>
-                                                <p className='fixedValue'>email@gmail.com</p>
+                                                <p className='fixedValue'>{doctorProfile[0]?.email}</p>
                                             </div>
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorEducation">Qualification</label>
-                                                <p className='fixedValue'>MBBS</p>
+                                                <p className='fixedValue'>{doctorProfile[0]?.qualification}</p>
                                             </div>
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorPhone">Phone</label>
-                                                <p className='fixedValue'>0123124125</p>
+                                                <p className='fixedValue'>{doctorProfile[0]?.phone}</p>
                                             </div>
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorName">Type of Doctor</label>
-                                                <input type="text" id='doctorName' value="Kidney Specialist" name='fullname' placeholder='Enter Name...' />
+                                                <input type="text" id='doctorName' value={doctorProfile[0]?.specialist_category} name='fullname' placeholder='Enter Name...' />
                                             </div>
                                         </div>
                                     
@@ -72,7 +87,7 @@ export const Profile = () => {
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="endTime">Shift</label>
-                                                <input type="text" id='endTime' name='endTime' placeholder='Enter Shift' />
+                                                <input type="text" id='endTime' name='endTime' placeholder='Enter Shift' value={doctorProfile[0]?.availability} />
                                             </div>
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
