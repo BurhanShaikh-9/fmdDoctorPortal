@@ -4,12 +4,14 @@ import './style.css';
 import { Layout } from './Main/layout';
 import { Sidebar } from './Main/Component/sidebar';
 import { Dashboard } from './Main/WebPage/dashboard/dashboard';
-import {Appointment} from './Main/WebPage/appointment/appointment'
+import { Appointment } from './Main/WebPage/appointment/appointment'
 import { ROUTES } from './utils/Routes';
 import { TotalProfile } from './Main/WebPage/doctorReport/totalProfile';
 import { Sales } from './Main/WebPage/doctorReport/sales';
 import { Profile } from './Main/WebPage/doctorProfile/profile';
-
+import { Login } from './Main/WebPage/login';
+import TokenService from './services/tokenService';
+// import { Page404 } from './Main/Component/page404';
 
 export const SidebarContext = createContext({ sideBar: false, setSideBar: () => { } })
 
@@ -19,25 +21,32 @@ function App() {
   const getSideBarPos = (value) => {
     setsideBar(!value);
   }
+  const { getStorageData, getToken } = TokenService();
+  const token = getToken();
+  const userType = getStorageData();
 
   return (
     <>
-      <SidebarContext.Provider value={{ sideBar: sideBar, setSideBar: setsideBar }}>
-        <Sidebar />
-        <div className={sideBar ? 'AppFull' : 'App'}>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path={ROUTES.HOMEPAGE} element={<Dashboard />} />
-              <Route path={ROUTES.APPOINTMENT} element={<Appointment />} />
-              <Route path={ROUTES.TOTALPROFIT} element={< TotalProfile />} />
-              <Route path={ROUTES.SALES} element={< Sales />} />
-              <Route path={ROUTES.PROFILE} element={< Profile />} />
-            </Route>
-          </Routes>
-        </div>
-      </SidebarContext.Provider>
-      
-      {/* <Login /> */}
+      {token && userType.type ?
+        <SidebarContext.Provider value={{ sideBar: sideBar, setSideBar: setsideBar }}>
+          <Sidebar />
+          <div className={sideBar ? 'AppFull' : 'App'}>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path={ROUTES.HOMEPAGE} element={<Dashboard />} />
+                <Route path={ROUTES.APPOINTMENT} element={<Appointment />} />
+                <Route path={ROUTES.TOTALPROFIT} element={< TotalProfile />} />
+                <Route path={ROUTES.SALES} element={< Sales />} />
+                <Route path={ROUTES.PROFILE} element={< Profile />} />
+              </Route>
+            </Routes>
+          </div>
+        </SidebarContext.Provider>
+
+        :
+        <Routes><Route path={ROUTES.HOMEPAGE} element={<Login />} /></Routes>
+
+      }
 
     </>
   );

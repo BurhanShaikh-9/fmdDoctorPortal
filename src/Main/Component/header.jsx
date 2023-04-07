@@ -3,10 +3,14 @@ import ProfileImg from '../../assets/images/profile-img.jpg'
 import {SidebarContext} from '../../App'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '../../utils/Routes'
+import TokenService from '../../services/tokenService'
 
 export const Header = (props) => {
-
+    const {clearToken} = TokenService();
     const { sideBar, setSideBar } = useContext(SidebarContext )
+    const handleSignout = () =>{
+        clearToken()
+    }
 
     return (
         <>
@@ -42,7 +46,7 @@ export const Header = (props) => {
                             <ul className="dropdown-menu">
                                 <li><Link to={ROUTES.PROFILE} className="dropdown-item" href="#"><i className="bi bi-person"/>Profile</Link></li>
                                 <li><a className="dropdown-item" href="#"><i className="bi bi-envelope"/>Inbox</a></li>
-                                <li><a className="dropdown-item" href="#"><i className="bi bi-box-arrow-in-left"/>Logout</a></li>
+                                <li onClick={handleSignout}><a className="dropdown-item" href="#"><i className="bi bi-box-arrow-in-left"/>Logout</a></li>
                             </ul>
                         </div>
                     </div>

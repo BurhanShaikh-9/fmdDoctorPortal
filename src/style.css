@@ -238,8 +238,56 @@ header .headerInner .menuButton i {
   align-items: center;
   padding: 50px;
 }
-.login .loginBody label {
+.login .card {
+  width: 50%;
+}
+.login .card .card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.login .card .card-body .loginOuter {
+  width: 80%;
+}
+.login .card .card-body .loginOuter .loginHeader {
+  margin-bottom: 20px;
+}
+.login .card .card-body .loginOuter .loginBody .fields1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.login .card .card-body .loginOuter .loginBody .fields {
+  margin-bottom: 10px;
+}
+.login .card .card-body .loginOuter .loginBody .fields button {
   display: block;
+  width: 150px;
+  background-color: #e92b2b;
+  text-decoration: none;
+  color: white;
+  border-radius: 25px;
+  padding: 10px 40px;
+  position: relative;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: 14px;
+  background-position: -110px 0;
+}
+.login .card .card-body .loginOuter .loginBody .fields label {
+  display: block;
+}
+.login .card .card-body .loginOuter .loginBody .fields input[type=email],
+.login .card .card-body .loginOuter .loginBody .fields input[type=password] {
+  width: 100%;
+  height: 33px;
+  border: 1px solid grey;
+  border-radius: 7px;
+  outline: none;
+  padding: 10px;
 }
 
 .mainSection .mainSectionWrapper {
@@ -260,6 +308,16 @@ header .headerInner .menuButton i {
 }
 .mainSection .mainSectionWrapper .cardForm {
   width: 90%;
+}
+.mainSection .mainSectionWrapper .cardForm .additionForm .fields .fixedValue {
+  width: 100%;
+  border: 1px solid rgb(219, 219, 219);
+  height: 38px;
+  padding: 6px;
+  border-radius: 7px;
+}
+.mainSection .mainSectionWrapper .cardForm .additionForm .fields .fixedValue:focus {
+  outline: #e92b2b;
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields .profileImage {
   display: flex;

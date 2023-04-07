@@ -315,13 +315,55 @@ header {
     align-items: center;
     padding: 50px;
 
-    .loginHeader {}
+    .card {
+        width: 50%;
 
-    .loginBody {
-        label {
-            display: block;
+        .card-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .loginOuter {
+                width: 80%;
+                .loginHeader {
+                    margin-bottom: 20px;
+                }
+
+                .loginBody {
+                    .fields1{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 100%;
+                        flex-wrap: wrap;
+                    }
+                    .fields{
+                        margin-bottom: 10px;
+                        button{
+                            @include redButton();
+                        }
+                        label {
+                            display: block;
+                        }
+                        input[type='email'],
+                        input[type='password']
+                        {
+                            width: 100%;
+                            height: 33px;
+                            border: 1px solid grey;
+                            border-radius: 7px;
+                            outline: none;
+                            padding: 10px;
+                        }
+                     
+                    }
+                }
+
+            }
         }
     }
+
 }
 
 .mainSection {
@@ -348,6 +390,17 @@ header {
 
             .additionForm {
                 .fields {
+                    .fixedValue{
+                        width: 100%;
+                        border: 1px solid rgb(219, 219, 219);
+                        height: 38px;
+                        padding: 6px;
+                        border-radius: 7px;
+
+                        &:focus {
+                            outline: #e92b2b;
+                        }
+                    }
                     .profileImage {
                         display: flex;
                         justify-content: center;
