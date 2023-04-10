@@ -40,7 +40,7 @@ export const AppointmentDetails = () => {
                                                     Booking Date
                                                 </div>
                                                 <div className="summary">
-                                                   12/02/2023
+                                                    12/02/2023
                                                 </div>
                                             </div>
                                             <div className="mainBodySection">
@@ -51,48 +51,66 @@ export const AppointmentDetails = () => {
                                                     22:00
                                                 </div>
                                             </div>
-                                            <div className="mainBodySection">
+                                            {/* <div className="mainBodySection">
                                                 <div className="subHeading">
                                                     Address
                                                 </div>
                                                 <div className="summary">
                                                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                                 </div>
-                                            </div>
-                                            <div className="mainBodySection">
+                                            </div> */}
+                                            {/* <div className="mainBodySection">
                                                 <div className="subHeading">
                                                     Payment
                                                 </div>
                                                 <div className="summary">
                                                     Cash
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <hr />
                                             <div className="mainBodySection">
                                                 <div className="subHeading">
-                                                    Test Details
+                                                    Prescription
                                                 </div>
                                                 <div className="testSummary">
                                                     <div className="tesDetails">
                                                         <div className="testDetailsInner">
-                                                            Blood Test | Agha Khan Hospital
+                                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quibusdam accusantium, quo animi eum beatae!
+                                                            
                                                         </div>
-                                                        <div className="testDetailsInner">
+                                                        {/* <div className="testDetailsInner">
                                                             Rs.700
+                                                        </div> */}
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <hr />
+                                        
+                                            <div className="mainBodySection">
+                                                <div className="subHeading">
+                                                    Medicine
+                                                </div>
+                                                <div className="testSummary">
+                                                    <div className="tesDetails">
+                                                        <div className="testDetailsInner">
+                                                            Panadol 500mg
                                                         </div>
+                                                        {/* <div className="testDetailsInner">
+                                                            Rs.700
+                                                        </div> */}
                                                     </div>
                                                     <div className="tesDetails">
                                                         <div className="testDetailsInner">
-                                                            Blood Test | Agha Khan Hospital
+                                                            Panadol 500mg
                                                         </div>
-                                                        <div className="testDetailsInner">
+                                                        {/* <div className="testDetailsInner">
                                                             Rs.700
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </div>
                                             </div>
                                             <hr />
-
                                             <div className="mainBodySection">
 
                                                 <div className="testSummary">

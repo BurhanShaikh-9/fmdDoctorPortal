@@ -4,22 +4,33 @@ import DoctorService from '../../../services/doctorService';
 import TokenService from '../../../services/tokenService';
 
 export const Profile = () => {
-    const { getDoctorSingle } = DoctorService();
-    const { getStorageData } = TokenService();
-    const userType = getStorageData();
-    const [doctorProfile, setDoctorProfile] = useState();
 
-    useEffect(()=>{
-        getDoctorSingle(userType.id).then((res) => {
-            setDoctorProfile(res?.data?.data)
-        }).catch((error) => {
-            console.log(error)
-        },[doctorProfile])
+    const { getDoctorData } = TokenService();
+    const [doctorProfile, setDoctorProfile] = useState({
+        fullname:"",
+        email:"",
+        qualification:"",
+        phone:"",
+        specialist_category:"",
+        availability:"",
+        fee:""
+    });
+    const [doctorData, setDoctorData] = useState();
+
+
+    const getInput = (e) =>{
+        const name = e.target.name;
+        const value = e.target.value
+        setDoctorProfile({...doctorProfile, [name]:value})
+    }
+    // console.log(doctorData?.image, "image")
+    useEffect(() => {
+        setDoctorData(getDoctorData())
       
-    })
+    }, [])
     return (
         <>
-               <section className='mainSection'>
+            <section className='mainSection'>
                 <div className="container">
                     <div className="mainSectionWrapper">
                         <div className="heading">
@@ -34,9 +45,8 @@ export const Profile = () => {
                                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                             <div className="fields">
                                                 <div className="profileImage">
-                                                    <img src={profilePic} alt="" className='profileImage' />
+                                                    <img src={`${doctorData?.image}` && profilePic} alt="" className='profileImage' />
                                                 </div>
-
                                             </div>
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
@@ -45,58 +55,74 @@ export const Profile = () => {
                                                 <input type="file" className='form-control' id='uploadImg' name='image' />
                                             </div>
                                         </div>
-                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                            <div className="fields">
-                                                <label htmlFor="doctorName">Name</label>
-                                                <p className='fixedValue'>{doctorProfile[0]?.fullname}</p>
-                                                
+                                
+                                            <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                                <div className="fields">
+                                                    <label htmlFor="doctorName">Name</label>
+                                                    <input type='text'  value={doctorData?.fullname} onChange={getInput}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                            <div className="fields">
-                                                <label htmlFor="doctorEmail">Email</label>
-                                                <p className='fixedValue'>{doctorProfile[0]?.email}</p>
+                            
+                                  
+                                            <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                                <div className="fields">
+                                                    <label htmlFor="doctorEmail">Email</label>
+                                                    <input type='text' value={doctorData?.email} onChange={getInput}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                            <div className="fields">
-                                                <label htmlFor="doctorEducation">Qualification</label>
-                                                <p className='fixedValue'>{doctorProfile[0]?.qualification}</p>
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                            <div className="fields">
-                                                <label htmlFor="doctorPhone">Phone</label>
-                                                <p className='fixedValue'>{doctorProfile[0]?.phone}</p>
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                            <div className="fields">
-                                                <label htmlFor="doctorName">Type of Doctor</label>
-                                                <input type="text" id='doctorName' value={doctorProfile[0]?.specialist_category} name='fullname' placeholder='Enter Name...' />
-                                            </div>
-                                        </div>
+                                
                                     
+                                            <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                                <div className="fields">
+                                                    <label htmlFor="doctorEducation">Qualification</label>
+                                                    <input value={doctorData?.qualification} type='text' onChange={getInput}/>
+                                                </div>
+                                            </div>
+                                     
+                                            <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                                <div className="fields">
+                                                    <label htmlFor="doctorPhone">Phone</label>
+                                                    <input type='number' onChange={getInput} className='fixedValue' name='phone' value={doctorData?.phone}></input>
+                                                </div>
+                                            </div>
+                               
+                                            <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                                <div className="fields">
+                                                    <label htmlFor="doctorName">Type of Doctor</label>
+                                                    <input type="text" id='doctorName' value={doctorData?.specialist_category} name='fullname' placeholder='Enter Name...' onChange={getInput} />
+                                                </div>
+                                            </div>
+                                  
 
-                                        {/* <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                            <div className="fields">
-                                                <label htmlFor="startTime">Start Time</label>
-                                                <input type="time" id='startTime' name='startTime' />
+                                     
+                                            <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                                <div className="fields">
+                                                    <label htmlFor="endTime">Shift</label>
+                                                    {/* <input type="text" id='endTime' name='endTime' placeholder='Enter Shift' value={doctorProfile[0]?.availability} /> */}
+                                                    <select value={doctorData?.availability} >
+                                                        {doctorData?.availability === "day" ?
+                                                            <>
+                                                                <option value="day">Day</option>
+                                                                <option value="night">Night</option>
+                                                            </>
+                                                            :
+                                                            <>
+                                                                <option value="night">Night</option>
+                                                                <option value="day">Day</option>
+                                                            </>
+                                                        }
+
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div> */}
-                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                            <div className="fields">
-                                                <label htmlFor="endTime">Shift</label>
-                                                <input type="text" id='endTime' name='endTime' placeholder='Enter Shift' value={doctorProfile[0]?.availability} />
-                                            </div>
-                                        </div>
+                                
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="fees">Fee of Session</label>
-                                                <input type="text" id='fees' name='fees' placeholder='Enter Fees...' />
+                                                <input type="text" id='fees' value={doctorData?.fee} name='fees' placeholder='Enter Fees...' onChange={getInput} />
                                             </div>
                                         </div>
-                                        
+
 
                                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                             <div className="fields">

@@ -14,7 +14,22 @@ const DoctorService = () => {
         return axios.request(config)
     }
 
-    return { getDoctorSingle }
+    const updateDoctor = (data) =>{
+        let config = {
+            method: 'patch',
+            maxBodyLength: Infinity,
+            url: `${baseUrl}/doctors/`,
+            headers: {
+                'Authorization': `Bearer ${newToken}`,
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        return axios.request(config)
+    }
+
+    return { getDoctorSingle, updateDoctor }
 
 }
 

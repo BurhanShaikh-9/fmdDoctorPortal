@@ -23,7 +23,7 @@ const AuthService = () => {
       userToken(token);
       navigate(ROUTES.HOMEPAGE)
       setUserObject(userData)
-      window.location.reload();
+      // window.location.reload();
     }
     else {
       toast.error('invalid Login!');

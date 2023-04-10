@@ -21,6 +21,10 @@ const TokenService = () => {
         return savedData;
     }
 
+    const getDoctorData = () => {
+        const savedData = JSON.parse(sessionStorage.getItem("doctorProfile"));
+        return savedData;
+    }
 
     const clearToken = () => {
         sessionStorage.clear();
@@ -28,7 +32,7 @@ const TokenService = () => {
         window.location.reload();
     }
 
-    return { userToken, setUserObject, getStorageData, clearToken, getToken }
+    return { userToken, setUserObject, getStorageData, clearToken, getToken, getDoctorData }
 
 }
 

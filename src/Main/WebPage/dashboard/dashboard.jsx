@@ -1,7 +1,22 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import ReactApexChart from 'react-apexcharts';
+import DoctorService from '../../../services/doctorService';
+import TokenService from '../../../services/tokenService';
 
 export const Dashboard = () => {
+  const { getDoctorSingle, updateDoctor } = DoctorService();
+  const { getStorageData } = TokenService();
+  const [doctorData, setDoctorData] = useState({});
+
+  useEffect(() => {
+    const userType = getStorageData();
+    getDoctorSingle(userType?.id).then((res) => {
+        setDoctorData(sessionStorage.setItem("doctorProfile", JSON.stringify(res?.data?.data[0])));
+    }).catch((error) => {
+        console.log(error)
+    })
+}, [])
+
   const Line1 = {
     chart: {
       id: 'spark1',
