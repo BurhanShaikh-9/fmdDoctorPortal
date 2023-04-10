@@ -638,7 +638,12 @@ header {
                         gap: 10px;
                         margin-top: 10px;
                     }
-
+                    .metaButtons .viewButton {
+                        color: grey;
+                        // background-color: #02685023;
+                        border-radius: 5px;
+                        border: 1px solid #bbbbbb;
+                    }
                     .metaButtons .acceptButton {
                         color: #026851;
                         background-color: #02685023;
@@ -705,8 +710,36 @@ header {
                 color: #e92b2b;
                 border-top: 3px solid #e92b2b;
             }
+            
         }
-
+        .appointmentDetails{
+            .mainHeading{
+                font-size: 25px;
+                font-weight: 600;
+            }
+            .mainBody{
+                .mainBodySection{
+                    .subHeading{
+                        margin-top: 20px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #e92b2b;
+                        span{
+                            font-size: 16px;
+                            font-weight: 400;
+                        }
+                    }
+                    .testSummary{
+                     
+                        .tesDetails{
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                    }
+                }
+            }
+        }
 
     }
 }

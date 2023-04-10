@@ -5,6 +5,7 @@ export const ROUTES = {
     FAQS:"faqs",
     TOTALPROFIT:"Report-profit",
     SALES:"report-sales",
-    PROFILE:"profile"
+    PROFILE:"profile",
+    APPOINTMENT_DETAILS:"/appointment-details",
 }
 
