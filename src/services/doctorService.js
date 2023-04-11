@@ -1,8 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { ROUTES, ROUTING } from "../utils/Routes";
 import axios from 'axios'
+import TokenService from "./tokenService";
 
 const DoctorService = () => {
+    const { getToken } = TokenService();
+
+    const token = getToken()
+    let newToken = token.slice(1, -1);
     const baseUrl = 'https://fmd.arraydigitals.com/api';
 
     const getDoctorSingle = (doctorId) => {
