@@ -33,8 +33,16 @@ const DoctorService = () => {
 
         return axios.request(config)
     }
+    const getAppointment = (doctorId) => {
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `${baseUrl}/appointment-doctor/76`,
+        };
+        return axios.request(config)
+    }
 
-    return { getDoctorSingle, updateDoctor }
+    return { getDoctorSingle, updateDoctor, getAppointment }
 
 }
 

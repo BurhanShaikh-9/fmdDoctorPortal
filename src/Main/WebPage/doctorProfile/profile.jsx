@@ -6,7 +6,7 @@ import moonImg from '../../../assets/images/moon.png'
 import TokenService from '../../../services/tokenService';
 
 export const Profile = () => {
-
+    const [addTime, setAddTime] = useState([]);
     const { getDoctorData } = TokenService();
     const { updateDoctor } = DoctorService();
     const [doctorData, setDoctorData] = useState(getDoctorData());
@@ -15,15 +15,15 @@ export const Profile = () => {
         email: doctorData?.email,
         // password: doctorData?.password,
         phone: doctorData?.phone,
-        // image:doctorData?.image,
+        image:doctorData?.image,
         qualification: doctorData?.qualification,
         experience: doctorData?.experience,
         specialist_category: doctorData?.specialist_category,
-        availability: doctorData?.availability,
-        fee: doctorData?.fee
+        pdma_id:doctorData?.PMDA_ID,
+        cnic:doctorData?.CNIC,
+        shift: doctorData?.availability,
+        fee: doctorData?.fee,
     });
-
-
 
     const getInput = (e) => {
         const name = e.target.name;
@@ -37,7 +37,7 @@ export const Profile = () => {
         console.log(doctorSubmitData)
         updateDoctor(doctorSubmitData).then((res) => {
             console.log(res)
-            const updatedDoctor = { ...doctorData, fullname: doctorProfile?.fullname, email: doctorProfile?.email, phone: doctorProfile?.phone, qualification: doctorProfile?.qualification, specialist_category: doctorProfile?.specialist_category, fee: doctorProfile?.fee, availability: doctorProfile?.availability }
+            const updatedDoctor = { ...doctorData}
             console.log(updatedDoctor, "updated Doctor Submit")
             sessionStorage.setItem('doctorProfile', JSON.stringify(updatedDoctor));
             setDoctorData(updatedDoctor);
@@ -45,6 +45,25 @@ export const Profile = () => {
         }).catch((res) => {
             console.log(res.message)
         })
+    }
+
+    const [addDesc, setAddDesc] = useState([1]);
+    function handleAddMoreClick(e) {
+        e.preventDefault();
+        if (addDesc.length <= 8) {
+            setAddDesc([...addDesc, ""]);
+        }
+        else {
+            setAddDesc(addDesc);
+        }
+
+    }
+    const handleServiceDelete = (index) => {
+        index.preventDefault();
+        console.log("clicked")
+        const list = [...addDesc]
+        list.splice(index, 1);
+        setAddDesc(list)
     }
     return (
         <>
@@ -143,6 +162,33 @@ export const Profile = () => {
 
                                             </div>
                                         </div>
+
+                                        {/* {
+                                                addDesc.map((item, keyId) => ( */}
+
+                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                            <div className="fields">
+                                                <label htmlFor="time">Start Time</label>
+                                                <input type="time" id='time' name='doctorTime' onChange={getInput} />
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                            <div className="fields">
+                                                <label htmlFor="endTime">End Time</label>
+                                                <input type="time" id='endTime' name='doctorEndTime' onChange={getInput} />
+                                            </div>
+                                        </div>
+
+                                        {/* ))
+                                            }
+                                            <div className="addMoreButton">
+                                                {addDesc.length >= 2 &&
+                                                    <button onClick={handleServiceDelete}>remove</button>
+                                                }
+                                                {addDesc.length <= 4 &&
+                                                    <button onClick={handleAddMoreClick}>Add More</button>
+                                                }
+                                            </div> */}
 
                                         {/* <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">

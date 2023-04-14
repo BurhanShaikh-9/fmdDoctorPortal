@@ -120,7 +120,7 @@ a {
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: rgba(233, 43, 43, 0.8078431373);
+  color: rgba(235, 87, 87, 0.8078431373);
   padding: 10px 0 10px 10px;
   transition: all 0.3s;
 }
@@ -145,7 +145,7 @@ a {
   color: #aa97b0;
 }
 .sideBarInner .sidebar-nav .nav-item .active {
-  background-color: #e92b2b;
+  background-color: #EB5757;
   border-radius: 10px;
 }
 .sideBarInner .sidebar-nav .nav-item .active .sideIcon {
@@ -178,9 +178,9 @@ header .headerInner .navRight {
   gap: 20px;
 }
 header .headerInner .navRight .notificationDropDown .dropdown-toggle {
-  background-color: rgba(233, 43, 43, 0.0666666667);
+  background-color: rgba(235, 87, 87, 0.0666666667);
   border: none;
-  color: #e92b2b;
+  color: #EB5757;
   font-size: 23px;
   position: relative;
 }
@@ -193,9 +193,9 @@ header .headerInner .navRight .notificationDropDown .dropdown-toggle::after {
   display: none;
 }
 header .headerInner .navRight .profileDropDown .dropdown-toggle {
-  background-color: rgba(233, 43, 43, 0);
+  background-color: rgba(235, 87, 87, 0);
   border: none;
-  color: #e92b2b;
+  color: #EB5757;
   font-size: 23px;
   position: relative;
 }
@@ -210,14 +210,14 @@ header .headerInner .navRight .profileDropDown .dropdown-toggle::after {
   display: none;
 }
 header .headerInner .navRight .profileDropDown .dropdown-menu li a i {
-  color: #e92b2b;
+  color: #EB5757;
   margin-right: 10px;
 }
 header .headerInner .navRight .aboutDoctor {
   text-align: right;
 }
 header .headerInner .navRight .aboutDoctor .doctorName {
-  color: #e92b2b;
+  color: #EB5757;
   font-weight: 600;
 }
 header .headerInner .navRight .aboutDoctor .doctorSpeciality {
@@ -225,7 +225,7 @@ header .headerInner .navRight .aboutDoctor .doctorSpeciality {
 }
 header .headerInner .menuButton {
   background-color: rgba(170, 151, 176, 0);
-  color: #e92b2b;
+  color: #EB5757;
   outline: none;
 }
 header .headerInner .menuButton i {
@@ -266,7 +266,7 @@ header .headerInner .menuButton i {
 .login .card .card-body .loginOuter .loginBody .fields button {
   display: block;
   width: 150px;
-  background-color: #e92b2b;
+  background-color: #EB5757;
   text-decoration: none;
   color: white;
   border-radius: 25px;
@@ -303,11 +303,22 @@ header .headerInner .menuButton i {
 }
 .mainSection .mainSectionWrapper .heading p {
   font-size: 25px;
-  color: #e92b2b;
+  color: #EB5757;
   font-weight: 600;
 }
 .mainSection .mainSectionWrapper .cardForm {
   width: 90%;
+}
+.mainSection .mainSectionWrapper .cardForm .additionForm .addMoreButton {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  gap: 10px;
+}
+.mainSection .mainSectionWrapper .cardForm .additionForm .addMoreButton button {
+  color: #EB5757;
+  padding: 5px 10px;
+  border-radius: 25px;
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields .fixedValue {
   width: 100%;
@@ -317,7 +328,7 @@ header .headerInner .menuButton i {
   border-radius: 7px;
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields .fixedValue:focus {
-  outline: #e92b2b;
+  outline: #EB5757;
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields .profileImage {
   display: flex;
@@ -351,12 +362,12 @@ header .headerInner .menuButton i {
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields input[type=file]:focus,
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields input[type=time]:focus,
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields select:focus {
-  outline: #e92b2b;
+  outline: #EB5757;
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields button {
   display: block;
   width: 150px;
-  background-color: #e92b2b;
+  background-color: #EB5757;
   text-decoration: none;
   color: white;
   border-radius: 25px;
@@ -395,7 +406,7 @@ header .headerInner .menuButton i {
   width: 30px;
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields .toggleLabel i {
-  color: #e92b2b;
+  color: #EB5757;
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields .toggleButton {
   height: 40px;
@@ -435,10 +446,10 @@ header .headerInner .menuButton i {
   transition: 0.4s;
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields .toggleButton input:checked + .slider {
-  background-color: #e92b2b;
+  background-color: #EB5757;
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields .toggleButton input:focus + .slider {
-  box-shadow: 0 0 1px #e92b2b;
+  box-shadow: 0 0 1px #EB5757;
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields .toggleButton input:checked + .slider:before {
   transform: translateX(28px);
@@ -451,7 +462,7 @@ header .headerInner .menuButton i {
 }
 .mainSection .mainSectionWrapper .cardForm .chart .chartHeading p {
   font-size: 20px;
-  color: #e92b2b;
+  color: #EB5757;
   font-weight: 600;
 }
 .mainSection .mainSectionWrapper .cardForm .chart .chartHeading small {
@@ -476,7 +487,7 @@ header .headerInner .menuButton i {
   cursor: pointer;
   padding: 10px 20px;
   margin: 0px 2px;
-  background: #e92b2b;
+  background: #EB5757;
   display: inline-block;
   color: #fff;
   border-radius: 3px 3px 0px 0px;
@@ -576,8 +587,8 @@ header .headerInner .menuButton i {
 .mainSection .mainSectionWrapper .doctorAppointments #one:checked ~ .tabs #one-tab,
 .mainSection .mainSectionWrapper .doctorAppointments #two:checked ~ .tabs #two-tab {
   background: rgba(255, 255, 255, 0.9647058824);
-  color: #e92b2b;
-  border-top: 3px solid #e92b2b;
+  color: #EB5757;
+  border-top: 3px solid #EB5757;
 }
 .mainSection .mainSectionWrapper .appointmentDetails .mainHeading {
   font-size: 25px;
@@ -587,7 +598,7 @@ header .headerInner .menuButton i {
   margin-top: 20px;
   font-size: 16px;
   font-weight: 600;
-  color: #e92b2b;
+  color: #EB5757;
 }
 .mainSection .mainSectionWrapper .appointmentDetails .mainBody .mainBodySection .subHeading span {
   font-size: 16px;
@@ -604,7 +615,7 @@ header .headerInner .menuButton i {
 }
 .footer2 .footer2Main {
   width: 90%;
-  color: #e92b2b;
+  color: #EB5757;
   display: flex;
   justify-content: center;
   font-size: 12px;
@@ -612,7 +623,7 @@ header .headerInner .menuButton i {
   align-items: center;
 }
 .footer2 .footer2Main .footer2Link a {
-  color: #e92b2b;
+  color: #EB5757;
   text-decoration: none;
   margin-right: 20px;
 }

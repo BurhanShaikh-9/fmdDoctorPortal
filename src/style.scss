@@ -37,7 +37,7 @@ h4 {
 @mixin redButton {
     display: block;
     width: 150px;
-    background-color: #e92b2b;
+    background-color: #EB5757;
     text-decoration: none;
     color: white;
     border-radius: 25px;
@@ -117,10 +117,10 @@ a {
                 padding: 10px 15px;
                 border-radius: 4px;
                 // color: black;
-                // background-color: #e92b2bce;
+                // background-color: #EB5757ce;
 
                 span {
-                    // color: #e92b2b;
+                    // color: #EB5757;
                     color: #aa97b0;
                     font-size: 17px;
                 }
@@ -148,7 +148,7 @@ a {
                     align-items: center;
                     font-size: 14px;
                     font-weight: 600;
-                    color: #e92b2bce;
+                    color: #EB5757ce;
                     padding: 10px 0 10px 10px;
                     transition: all 0.3s;
 
@@ -182,7 +182,7 @@ a {
             }
 
             .active {
-                background-color: #e92b2b;
+                background-color: #EB5757;
                 border-radius: 10px;
 
                 .sideIcon {
@@ -233,9 +233,9 @@ header {
             .notificationDropDown {
 
                 .dropdown-toggle {
-                    background-color: #e92b2b11;
+                    background-color: #EB575711;
                     border: none;
-                    color: #e92b2b;
+                    color: #EB5757;
                     font-size: 23px;
                     position: relative;
 
@@ -253,9 +253,9 @@ header {
 
             .profileDropDown {
                 .dropdown-toggle {
-                    background-color: #e92b2b00;
+                    background-color: #EB575700;
                     border: none;
-                    color: #e92b2b;
+                    color: #EB5757;
                     font-size: 23px;
                     position: relative;
 
@@ -275,7 +275,7 @@ header {
                     li {
                         a {
                             i {
-                                color: #e92b2b;
+                                color: #EB5757;
                                 margin-right: 10px;
                             }
                         }
@@ -287,7 +287,7 @@ header {
                 text-align: right;
 
                 .doctorName {
-                    color: #e92b2b;
+                    color: #EB5757;
                     font-weight: 600;
                 }
 
@@ -299,7 +299,7 @@ header {
 
         .menuButton {
             background-color: #aa97b000;
-            color: #e92b2b;
+            color: #EB5757;
             outline: none;
 
             i {
@@ -326,29 +326,33 @@ header {
 
             .loginOuter {
                 width: 80%;
+
                 .loginHeader {
                     margin-bottom: 20px;
                 }
 
                 .loginBody {
-                    .fields1{
+                    .fields1 {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
                         width: 100%;
                         flex-wrap: wrap;
                     }
-                    .fields{
+
+                    .fields {
                         margin-bottom: 10px;
-                        button{
+
+                        button {
                             @include redButton();
                         }
+
                         label {
                             display: block;
                         }
+
                         input[type='email'],
-                        input[type='password']
-                        {
+                        input[type='password'] {
                             width: 100%;
                             height: 33px;
                             border: 1px solid grey;
@@ -356,7 +360,7 @@ header {
                             outline: none;
                             padding: 10px;
                         }
-                     
+
                     }
                 }
 
@@ -380,7 +384,7 @@ header {
 
             p {
                 font-size: 25px;
-                color: #e92b2b;
+                color: #EB5757;
                 font-weight: 600;
             }
         }
@@ -389,8 +393,23 @@ header {
             width: 90%;
 
             .additionForm {
+                .addMoreButton {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-top: 10px;
+                    gap: 10px;
+
+                    button {
+                        color: #EB5757;
+                        padding: 5px 10px;
+                        border-radius: 25px;
+
+                    }
+
+                }
+
                 .fields {
-                    .fixedValue{
+                    .fixedValue {
                         width: 100%;
                         border: 1px solid rgb(219, 219, 219);
                         height: 37px;
@@ -398,9 +417,10 @@ header {
                         border-radius: 7px;
 
                         &:focus {
-                            outline: #e92b2b;
+                            outline: #EB5757;
                         }
                     }
+
                     .profileImage {
                         display: flex;
                         justify-content: center;
@@ -430,7 +450,7 @@ header {
                         border-radius: 7px;
 
                         &:focus {
-                            outline: #e92b2b;
+                            outline: #EB5757;
                         }
                     }
 
@@ -473,7 +493,7 @@ header {
 
                     .toggleLabel {
                         i {
-                            color: #e92b2b;
+                            color: #EB5757;
                         }
                     }
 
@@ -522,11 +542,11 @@ header {
                         }
 
                         input:checked+.slider {
-                            background-color: #e92b2b;
+                            background-color: #EB5757;
                         }
 
                         input:focus+.slider {
-                            box-shadow: 0 0 1px #e92b2b;
+                            box-shadow: 0 0 1px #EB5757;
                         }
 
                         input:checked+.slider:before {
@@ -550,7 +570,7 @@ header {
                 .chartHeading {
                     p {
                         font-size: 20px;
-                        color: #e92b2b;
+                        color: #EB5757;
                         font-weight: 600;
                     }
 
@@ -584,7 +604,7 @@ header {
                 cursor: pointer;
                 padding: 10px 20px;
                 margin: 0px 2px;
-                background: #e92b2b;
+                background: #EB5757;
                 display: inline-block;
                 color: #fff;
                 border-radius: 3px 3px 0px 0px;
@@ -638,12 +658,14 @@ header {
                         gap: 10px;
                         margin-top: 10px;
                     }
+
                     .metaButtons .viewButton {
                         color: grey;
                         // background-color: #02685023;
                         border-radius: 5px;
                         border: 1px solid #bbbbbb;
                     }
+
                     .metaButtons .acceptButton {
                         color: #026851;
                         background-color: #02685023;
@@ -707,31 +729,35 @@ header {
             #one:checked~.tabs #one-tab,
             #two:checked~.tabs #two-tab {
                 background: #fffffff6;
-                color: #e92b2b;
-                border-top: 3px solid #e92b2b;
+                color: #EB5757;
+                border-top: 3px solid #EB5757;
             }
-            
+
         }
-        .appointmentDetails{
-            .mainHeading{
+
+        .appointmentDetails {
+            .mainHeading {
                 font-size: 25px;
                 font-weight: 600;
             }
-            .mainBody{
-                .mainBodySection{
-                    .subHeading{
+
+            .mainBody {
+                .mainBodySection {
+                    .subHeading {
                         margin-top: 20px;
                         font-size: 16px;
                         font-weight: 600;
-                        color: #e92b2b;
-                        span{
+                        color: #EB5757;
+
+                        span {
                             font-size: 16px;
                             font-weight: 400;
                         }
                     }
-                    .testSummary{
-                     
-                        .tesDetails{
+
+                    .testSummary {
+
+                        .tesDetails {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
@@ -750,7 +776,7 @@ header {
 
     .footer2Main {
         width: 90%;
-        color: #e92b2b;
+        color: #EB5757;
         display: flex;
         justify-content: center;
         font-size: 12px;
@@ -759,7 +785,7 @@ header {
 
         .footer2Link {
             a {
-                color: #e92b2b;
+                color: #EB5757;
                 text-decoration: none;
                 margin-right: 20px;
             }

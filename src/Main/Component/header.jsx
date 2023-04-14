@@ -6,7 +6,8 @@ import { ROUTES } from '../../utils/Routes'
 import TokenService from '../../services/tokenService'
 
 export const Header = (props) => {
-    const {clearToken} = TokenService();
+    const {clearToken, getDoctorData} = TokenService();
+    const [doctorData, setDoctorData] = useState(getDoctorData());
     const { sideBar, setSideBar } = useContext(SidebarContext )
     const handleSignout = () =>{
         clearToken()
@@ -33,7 +34,7 @@ export const Header = (props) => {
                         </div>
                       
                         <div className='aboutDoctor'>
-                            <p className='doctorName'>Doctor Name</p>
+                            <p className='doctorName'>{doctorData?.fullname}</p>
                             <p className='doctorSpeciality'>Specialist</p>
                         </div>
                         <div className="dropdown profileDropDown">
