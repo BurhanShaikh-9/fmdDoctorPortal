@@ -8,19 +8,21 @@ import TokenService from '../../../services/tokenService';
 export const Profile = () => {
     const [addTime, setAddTime] = useState([]);
     const { getDoctorData } = TokenService();
-    const { updateDoctor } = DoctorService();
+    const { updateDoctor, getSpecialist, getSingleSpecialist } = DoctorService();
     const [doctorData, setDoctorData] = useState(getDoctorData());
+    const [docSpecialist, setDoctorSpecialist] = useState([])
+    const [singleSpecialist, setSingleSpecialist] = useState( JSON.parse(sessionStorage.getItem("doctorSpecialist")))
     const [doctorProfile, setDoctorProfile] = useState({
         fullname: doctorData?.fullname,
         email: doctorData?.email,
         // password: doctorData?.password,
         phone: doctorData?.phone,
-        image:doctorData?.image,
+        image: doctorData?.image,
         qualification: doctorData?.qualification,
         experience: doctorData?.experience,
         specialist_category: doctorData?.specialist_category,
-        pdma_id:doctorData?.PMDA_ID,
-        cnic:doctorData?.CNIC,
+        pdma_id: doctorData?.PMDA_ID,
+        cnic: doctorData?.CNIC,
         shift: doctorData?.availability,
         fee: doctorData?.fee,
     });
@@ -34,11 +36,9 @@ export const Profile = () => {
     const formSumbit = (e) => {
         e.preventDefault();
         const doctorSubmitData = { ...doctorProfile }
-        console.log(doctorSubmitData)
         updateDoctor(doctorSubmitData).then((res) => {
             console.log(res)
-            const updatedDoctor = { ...doctorData}
-            console.log(updatedDoctor, "updated Doctor Submit")
+            const updatedDoctor = { ...doctorData }
             sessionStorage.setItem('doctorProfile', JSON.stringify(updatedDoctor));
             setDoctorData(updatedDoctor);
             // window.location.reload();
@@ -47,24 +47,15 @@ export const Profile = () => {
         })
     }
 
-    const [addDesc, setAddDesc] = useState([1]);
-    function handleAddMoreClick(e) {
-        e.preventDefault();
-        if (addDesc.length <= 8) {
-            setAddDesc([...addDesc, ""]);
-        }
-        else {
-            setAddDesc(addDesc);
-        }
+    useEffect(() => {
 
-    }
-    const handleServiceDelete = (index) => {
-        index.preventDefault();
-        console.log("clicked")
-        const list = [...addDesc]
-        list.splice(index, 1);
-        setAddDesc(list)
-    }
+        getSpecialist().then((res) => {
+            setDoctorSpecialist(res?.data?.data)
+        }).catch((res) => {
+            console.log(res)
+        });
+       
+    },[docSpecialist])
     return (
         <>
             <section className='mainSection'>
@@ -106,8 +97,6 @@ export const Profile = () => {
                                                 <input type='text' name='email' value={doctorProfile?.email} onChange={getInput} />
                                             </div>
                                         </div>
-
-
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorEducation">Qualification</label>
@@ -124,8 +113,19 @@ export const Profile = () => {
 
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
-                                                <label htmlFor="doctorName">Type of Doctor</label>
-                                                <input type="text" id='doctorName' value={doctorProfile?.specialist_category} name='specialist_category' placeholder='Enter Name...' onChange={getInput} />
+                                                <label htmlFor="doctorName">Speciality</label>
+                                                {/* <input type="text" id='doctorName' value={doctorProfile?.specialist_category} name='specialist_category' placeholder='Enter Name...' onChange={getInput} /> */}
+
+                                                <select name="" id="">
+                                                    <option value={singleSpecialist?.id}>-- {singleSpecialist?.title} --</option>
+                                                    {docSpecialist?.map((item, keyId) => {
+                                                        return (
+                                                            <option value="" key={keyId}>{item?.title}</option>
+                                                        )
+                                                    })
+                                                    }
+
+                                                </select>
                                             </div>
                                         </div>
 
@@ -149,14 +149,14 @@ export const Profile = () => {
                                                             <img src={sunImg} alt="" />
                                                             <label htmlFor="doctorDayAvailability">Day</label>
                                                         </div>
-                                                        <input type="radio" id="doctorDayAvailability" value="Day" checked={doctorProfile?.availability == "Day"} name='availability' onChange={getInput} />
+                                                        <input type="radio" id="doctorDayAvailability" value="Day" checked={doctorProfile?.availability == "Day" || "day"} name='availability' onChange={getInput} />
                                                     </div>
                                                     <div className="availInner">
                                                         <div className="labelDiv">
                                                             <img className='moon' src={moonImg} alt="" />
                                                             <label htmlFor="doctorNightAvailability">Night</label>
                                                         </div>
-                                                        <input type="radio" name='availability' value="Night" checked={doctorProfile?.availability == "Night"} id='doctorNightAvailability' onChange={getInput} />
+                                                        <input type="radio" name='availability' value="Night" checked={doctorProfile?.availability == "Night" || "night"} id='doctorNightAvailability' onChange={getInput} />
                                                     </div>
                                                 </div>
 

@@ -23,7 +23,7 @@ const DoctorService = () => {
         let config = {
             method: 'patch',
             maxBodyLength: Infinity,
-            url: `${baseUrl}/doctors/`,
+            url: `${baseUrl}/doctors/update`,
             headers: {
                 'Authorization': `Bearer ${newToken}`,
                 'Content-Type': 'application/json'
@@ -41,8 +41,24 @@ const DoctorService = () => {
         };
         return axios.request(config)
     }
+    const getSpecialist = () => {
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `${baseUrl}/specialist-categories`,
+        };
+        return axios.request(config)
+    }
+    const getSingleSpecialist = (id) => {
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `${baseUrl}/specialist-categories/${id}`,
+        };
+        return axios.request(config)
+    }
 
-    return { getDoctorSingle, updateDoctor, getAppointment }
+    return { getDoctorSingle, updateDoctor, getAppointment, getSpecialist, getSingleSpecialist }
 
 }
 

@@ -1,21 +1,31 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactApexChart from 'react-apexcharts';
 import DoctorService from '../../../services/doctorService';
 import TokenService from '../../../services/tokenService';
 
 export const Dashboard = () => {
-  const { getDoctorSingle, updateDoctor } = DoctorService();
-  const { getStorageData } = TokenService();
+  const { getDoctorSingle, updateDoctor, getSpecialist, getSingleSpecialist } = DoctorService();
+  const { getStorageData, getDoctorData } = TokenService();
   const [doctorData, setDoctorData] = useState({});
+  const [singleSpecialist, setSingleSpecialist] = useState({})
+  const [docSessionData, setDocSessionData] = useState()
 
   useEffect(() => {
     const userType = getStorageData();
-    getDoctorSingle(userType?.id).then((res) => {
-        setDoctorData(sessionStorage.setItem("doctorProfile", JSON.stringify(res?.data?.data[0])));
-    }).catch((error) => {
-        console.log(error)
+    const doctorSpeciality = getDoctorData();
+
+    getSingleSpecialist(doctorSpeciality?.specialist_category).then((res) => {
+      setSingleSpecialist(sessionStorage.setItem("doctorSpecialist", JSON.stringify(res?.data?.data[0])))
+
+    }).catch((res) => {
+      console.log(res)
     })
-}, [])
+    getDoctorSingle(userType?.id).then((res) => {
+      setDoctorData(sessionStorage.setItem("doctorProfile", JSON.stringify(res?.data?.data[0])));
+    }).catch((error) => {
+      console.log(error)
+    })
+  }, [singleSpecialist, docSessionData, doctorData])
 
   const Line1 = {
     chart: {
@@ -89,7 +99,7 @@ export const Dashboard = () => {
         name: 'Insurance A',
         data: [30, 40, 45, 50, 49, 60, 70, 91, 125, 150, 200, 190]
       },
-      
+
     ],
     xaxis: {
       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']

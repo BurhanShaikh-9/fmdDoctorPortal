@@ -1,13 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ProfileImg from '../../assets/images/profile-img.jpg'
 import {SidebarContext} from '../../App'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '../../utils/Routes'
 import TokenService from '../../services/tokenService'
 
-export const Header = (props) => {
+export const Header = () => {
     const {clearToken, getDoctorData} = TokenService();
     const [doctorData, setDoctorData] = useState(getDoctorData());
+
     const { sideBar, setSideBar } = useContext(SidebarContext )
     const handleSignout = () =>{
         clearToken()
