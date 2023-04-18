@@ -15,8 +15,7 @@ export const Dashboard = () => {
     const doctorSpeciality = getDoctorData();
 
     getSingleSpecialist(doctorSpeciality?.specialist_category).then((res) => {
-      setSingleSpecialist(sessionStorage.setItem("doctorSpecialist", JSON.stringify(res?.data?.data[0])))
-
+      setSingleSpecialist(sessionStorage?.setItem("doctorSpecialist", JSON.stringify(res?.data?.data[0])))
     }).catch((res) => {
       console.log(res)
     })

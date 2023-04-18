@@ -11,7 +11,11 @@ export const Profile = () => {
     const { updateDoctor, getSpecialist, getSingleSpecialist } = DoctorService();
     const [doctorData, setDoctorData] = useState(getDoctorData());
     const [docSpecialist, setDoctorSpecialist] = useState([])
-    const [singleSpecialist, setSingleSpecialist] = useState( JSON.parse(sessionStorage.getItem("doctorSpecialist")))
+
+    const jsonString = sessionStorage?.getItem("doctorSpecialist");
+    const initialData = jsonString ? JSON.parse(jsonString) : null;
+    const [singleSpecialist, setSingleSpecialist] = useState(initialData);
+
     const [doctorProfile, setDoctorProfile] = useState({
         fullname: doctorData?.fullname,
         email: doctorData?.email,
@@ -54,8 +58,8 @@ export const Profile = () => {
         }).catch((res) => {
             console.log(res)
         });
-       
-    },[docSpecialist])
+
+    }, [docSpecialist])
     return (
         <>
             <section className='mainSection'>
@@ -124,7 +128,6 @@ export const Profile = () => {
                                                         )
                                                     })
                                                     }
-
                                                 </select>
                                             </div>
                                         </div>
