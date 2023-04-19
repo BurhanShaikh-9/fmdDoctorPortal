@@ -12,6 +12,7 @@ import { Profile } from './Main/WebPage/doctorProfile/profile';
 import { Login } from './Main/WebPage/login';
 import TokenService from './services/tokenService';
 import { AppointmentDetails } from './Main/WebPage/appointment/appointmentDetails';
+import DoctorService from './services/doctorService';
 // import { Page404 } from './Main/Component/page404';
 
 export const SidebarContext = createContext({ sideBar: false, setSideBar: () => { } })
@@ -22,13 +23,15 @@ function App() {
   const getSideBarPos = (value) => {
     setsideBar(!value);
   }
-  const { getStorageData, getToken, clearToken } = TokenService();
+  const { getStorageData, getToken, clearToken, getDoctorData } = TokenService();
   const token = getToken();
   const userType = getStorageData();
   const timeoutId = setTimeout(() => {
     clearToken();
-  },3600000)
+  }, 3600000)
   clearTimeout(timeoutId)
+
+
   return (
     <>
       {token && userType.type ?
@@ -42,7 +45,7 @@ function App() {
                 <Route path={ROUTES.TOTALPROFIT} element={< TotalProfile />} />
                 <Route path={ROUTES.SALES} element={< Sales />} />
                 <Route path={ROUTES.PROFILE} element={< Profile />} />
-                <Route path={ROUTES.APPOINTMENT_DETAILS} element={<AppointmentDetails/>}></Route>
+                <Route path={ROUTES.APPOINTMENT_DETAILS} element={<AppointmentDetails />}></Route>
               </Route>
             </Routes>
           </div>

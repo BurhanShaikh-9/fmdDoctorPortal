@@ -15,7 +15,7 @@ const TokenService = () => {
     const setUserObject = (data) => {
         sessionStorage.setItem("data", JSON.stringify(data));
     }
-
+    
     const getStorageData = () => {
         const savedData = JSON.parse(sessionStorage.getItem("data"));
         return savedData;

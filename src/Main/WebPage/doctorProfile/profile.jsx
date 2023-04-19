@@ -12,10 +12,11 @@ export const Profile = () => {
     const [doctorData, setDoctorData] = useState(getDoctorData());
     const [docSpecialist, setDoctorSpecialist] = useState([])
     let imageUrl = "http://fmd.arraydigitals.com"
-    const jsonString = sessionStorage?.getItem("doctorSpecialist");
-    const initialData = jsonString ?? JSON.parse(jsonString);
+
+    const jsonSpecilistString = sessionStorage?.getItem("doctorSpecialist");
+    const initialData = jsonSpecilistString ? JSON.parse(jsonSpecilistString) : null;
     const [singleSpecialist, setSingleSpecialist] = useState(initialData);
-    const [image, setImageUpdate] = useState()
+
     const [doctorProfile, setDoctorProfile] = useState({
         fullname: doctorData?.fullname,
         email: doctorData?.email,
@@ -42,17 +43,18 @@ export const Profile = () => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
-            setImageUpdate(reader.result);
+            setdoctorImage(reader.result);
         };
     }
 
     const formSumbit = (e) => {
         e.preventDefault();
-        const doctorSubmitData = { ...doctorProfile, image }
+        const doctorSubmitData = { ...doctorProfile }
         console.log(doctorSubmitData)
         updateDoctor(doctorSubmitData).then((res) => {
             console.log(res)
-            const updatedDoctor = { ...doctorData }
+            const updatedDoctor = { ...doctorData, fullname: doctorProfile?.fullname, email: doctorProfile?.email, qualification: doctorProfile?.qualification, experience:doctorProfile?.experience , phone: doctorProfile?.phone, fee: doctorProfile?.fee, start_time:doctorProfile?.start_time, end_time:doctorProfile?.end_time}
+
             sessionStorage.setItem('doctorProfile', JSON.stringify(updatedDoctor));
             setDoctorData(updatedDoctor);
             // window.location.reload();
@@ -62,11 +64,13 @@ export const Profile = () => {
     }
 
     useEffect(() => {
+
         getSpecialist().then((res) => {
             setDoctorSpecialist(res?.data?.data)
         }).catch((res) => {
             console.log(res)
         });
+
 
     }, [])
     return (
@@ -116,7 +120,13 @@ export const Profile = () => {
                                                 <input value={doctorProfile?.qualification} type='text' name='qualification' onChange={getInput} />
                                             </div>
                                         </div>
-
+                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                            <div className="fields">
+                                                <label htmlFor="doctorExperience">Experience</label>
+                                                <input value={doctorProfile?.experience} type='text' name='experience' onChange={getInput} />
+                                            </div>
+                                        </div>
+                            
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorPhone">Phone</label>
@@ -152,6 +162,23 @@ export const Profile = () => {
                                             </div>
                                         </div>
 
+                                       
+
+                                        {/* {
+                                                addDesc.map((item, keyId) => ( */}
+
+                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                            <div className="fields">
+                                                <label htmlFor="time">Start Time</label>
+                                                <input type="time" id='time' name='start_time' value={doctorProfile?.start_time} onChange={getInput} />
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                            <div className="fields">
+                                                <label htmlFor="endTime">End Time</label>
+                                                <input type="time" id='endTime' name='end_time' value={doctorProfile?.end_time} onChange={getInput} />
+                                            </div>
+                                        </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorDayAvailability">Availability</label>
@@ -174,23 +201,6 @@ export const Profile = () => {
 
                                             </div>
                                         </div>
-
-                                        {/* {
-                                                addDesc.map((item, keyId) => ( */}
-
-                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                            <div className="fields">
-                                                <label htmlFor="time">Start Time</label>
-                                                <input type="time" id='time' name='start_time' value={doctorProfile?.start_time} onChange={getInput} />
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                            <div className="fields">
-                                                <label htmlFor="endTime">End Time</label>
-                                                <input type="time" id='endTime' name='end_time' value={doctorProfile?.end_time} onChange={getInput} />
-                                            </div>
-                                        </div>
-
                                         {/* ))
                                             }
                                             <div className="addMoreButton">
