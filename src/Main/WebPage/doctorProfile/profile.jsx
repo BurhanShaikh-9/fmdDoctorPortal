@@ -11,15 +11,14 @@ export const Profile = () => {
     const { updateDoctor, getSpecialist, getSingleSpecialist } = DoctorService();
     const [doctorData, setDoctorData] = useState(getDoctorData());
     const [docSpecialist, setDoctorSpecialist] = useState([])
-
+    let imageUrl = "http://fmd.arraydigitals.com"
     const jsonString = sessionStorage?.getItem("doctorSpecialist");
-    const initialData = jsonString ? JSON.parse(jsonString) : null;
+    const initialData = jsonString ?? JSON.parse(jsonString);
     const [singleSpecialist, setSingleSpecialist] = useState(initialData);
-
+    const [image, setImageUpdate] = useState()
     const [doctorProfile, setDoctorProfile] = useState({
         fullname: doctorData?.fullname,
         email: doctorData?.email,
-        // password: doctorData?.password,
         phone: doctorData?.phone,
         image: doctorData?.image,
         qualification: doctorData?.qualification,
@@ -29,6 +28,8 @@ export const Profile = () => {
         cnic: doctorData?.CNIC,
         shift: doctorData?.availability,
         fee: doctorData?.fee,
+        start_time: doctorData?.start_time,
+        end_time: doctorData?.end_time,
     });
 
     const getInput = (e) => {
@@ -36,10 +37,19 @@ export const Profile = () => {
         const value = e.target.value
         setDoctorProfile({ ...doctorProfile, [name]: value })
     }
+    const getImageInput = e => {
+        const file = e.target.files[0]
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            setImageUpdate(reader.result);
+        };
+    }
 
     const formSumbit = (e) => {
         e.preventDefault();
-        const doctorSubmitData = { ...doctorProfile }
+        const doctorSubmitData = { ...doctorProfile, image }
+        console.log(doctorSubmitData)
         updateDoctor(doctorSubmitData).then((res) => {
             console.log(res)
             const updatedDoctor = { ...doctorData }
@@ -52,14 +62,13 @@ export const Profile = () => {
     }
 
     useEffect(() => {
-
         getSpecialist().then((res) => {
             setDoctorSpecialist(res?.data?.data)
         }).catch((res) => {
             console.log(res)
         });
 
-    }, [docSpecialist])
+    }, [])
     return (
         <>
             <section className='mainSection'>
@@ -77,14 +86,14 @@ export const Profile = () => {
                                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                             <div className="fields">
                                                 <div className="profileImage">
-                                                    <img src={`${doctorData?.image}` && profilePic} alt="" className='profileImage' />
+                                                    <img src={`${imageUrl}/${doctorData?.image}`} alt="" className='profileImage' />
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="uploadImg">Upload Profile</label>
-                                                <input type="file" className='form-control' id='uploadImg' name='image' />
+                                                <input type="file" className='form-control' id='uploadImg' name='image' onChange={getImageInput} />
                                             </div>
                                         </div>
 
@@ -172,13 +181,13 @@ export const Profile = () => {
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="time">Start Time</label>
-                                                <input type="time" id='time' name='doctorTime' onChange={getInput} />
+                                                <input type="time" id='time' name='start_time' value={doctorProfile?.start_time} onChange={getInput} />
                                             </div>
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="endTime">End Time</label>
-                                                <input type="time" id='endTime' name='doctorEndTime' onChange={getInput} />
+                                                <input type="time" id='endTime' name='end_time' value={doctorProfile?.end_time} onChange={getInput} />
                                             </div>
                                         </div>
 

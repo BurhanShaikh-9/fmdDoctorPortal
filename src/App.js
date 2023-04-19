@@ -22,10 +22,13 @@ function App() {
   const getSideBarPos = (value) => {
     setsideBar(!value);
   }
-  const { getStorageData, getToken } = TokenService();
+  const { getStorageData, getToken, clearToken } = TokenService();
   const token = getToken();
   const userType = getStorageData();
-
+  const timeoutId = setTimeout(() => {
+    clearToken();
+  },3600000)
+  clearTimeout(timeoutId)
   return (
     <>
       {token && userType.type ?
