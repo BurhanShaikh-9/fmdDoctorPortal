@@ -9,7 +9,7 @@ export const Dashboard = () => {
   const [doctorData, setDoctorData] = useState({});
   const [singleSpecialist, setSingleSpecialist] = useState({})
   const [docSessionData, setDocSessionData] = useState()
-
+  
   useEffect(() => {
     const userType = getStorageData();
     const doctorSpeciality = getDoctorData();
