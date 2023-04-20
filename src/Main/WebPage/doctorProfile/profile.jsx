@@ -9,14 +9,18 @@ export const Profile = () => {
     const [addTime, setAddTime] = useState([]);
     const { getDoctorData } = TokenService();
     const { updateDoctor, getSpecialist, getSingleSpecialist } = DoctorService();
-    const [doctorData, setDoctorData] = useState(getDoctorData());
     const [docSpecialist, setDoctorSpecialist] = useState([])
     let imageUrl = "http://fmd.arraydigitals.com"
-
+    
     const jsonSpecilistString = sessionStorage?.getItem("doctorSpecialist");
+    const jsonTypeString = sessionStorage?.getItem("doctorType");
     const initialData = jsonSpecilistString ? JSON.parse(jsonSpecilistString) : null;
     const [singleSpecialist, setSingleSpecialist] = useState(initialData);
-
+    
+    const [image, setDoctorImage] = useState()
+    //get the user data from Session Storage and store it in the useState;
+    const [doctorData, setDoctorData] = useState(getDoctorData());
+    //object of data which is set according to local storage;
     const [doctorProfile, setDoctorProfile] = useState({
         fullname: doctorData?.fullname,
         email: doctorData?.email,
@@ -33,28 +37,31 @@ export const Profile = () => {
         end_time: doctorData?.end_time,
     });
 
+    //get input fields
     const getInput = (e) => {
         const name = e.target.name;
         const value = e.target.value
         setDoctorProfile({ ...doctorProfile, [name]: value })
     }
+    //get Image file of Doctor
     const getImageInput = e => {
         const file = e.target.files[0]
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
-            setdoctorImage(reader.result);
+            setDoctorImage(reader.result);
         };
     }
 
     const formSumbit = (e) => {
+        console.log(doctorProfile,"doctorProfile")
         e.preventDefault();
-        const doctorSubmitData = { ...doctorProfile }
+        //image sent in database
+        const doctorSubmitData = { ...doctorProfile, image }
         console.log(doctorSubmitData)
         updateDoctor(doctorSubmitData).then((res) => {
             console.log(res)
-            const updatedDoctor = { ...doctorData, fullname: doctorProfile?.fullname, email: doctorProfile?.email, qualification: doctorProfile?.qualification, experience:doctorProfile?.experience , phone: doctorProfile?.phone, fee: doctorProfile?.fee, start_time:doctorProfile?.start_time, end_time:doctorProfile?.end_time}
-
+            const updatedDoctor = { ...doctorData, fullname: doctorProfile?.fullname, email: doctorProfile?.email, qualification: doctorProfile?.qualification, experience:doctorProfile?.experience , phone: doctorProfile?.phone, fee: doctorProfile?.fee, start_time:doctorProfile?.start_time, end_time:doctorProfile?.end_time, availability:doctorProfile?.shift}
             sessionStorage.setItem('doctorProfile', JSON.stringify(updatedDoctor));
             setDoctorData(updatedDoctor);
             // window.location.reload();
@@ -90,7 +97,7 @@ export const Profile = () => {
                                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                             <div className="fields">
                                                 <div className="profileImage">
-                                                    <img src={`${imageUrl}/${doctorData?.image}`} alt="" className='profileImage' />
+                                                    <img src={`${imageUrl}/${doctorData?.image}`} alt="" className='profileImage' onChange={getImageInput}/>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,14 +195,14 @@ export const Profile = () => {
                                                             <img src={sunImg} alt="" />
                                                             <label htmlFor="doctorDayAvailability">Day</label>
                                                         </div>
-                                                        <input type="radio" id="doctorDayAvailability" value="Day" checked={doctorProfile?.availability == "Day" || "day"} name='availability' onChange={getInput} />
+                                                        <input type="radio" id="doctorDayAvailability" value="Day"  name='shift' onChange={getInput} />
                                                     </div>
                                                     <div className="availInner">
                                                         <div className="labelDiv">
                                                             <img className='moon' src={moonImg} alt="" />
                                                             <label htmlFor="doctorNightAvailability">Night</label>
                                                         </div>
-                                                        <input type="radio" name='availability' value="Night" checked={doctorProfile?.availability == "Night" || "night"} id='doctorNightAvailability' onChange={getInput} />
+                                                        <input type="radio" name='shift' value="Night"  id='doctorNightAvailability' onChange={getInput} />
                                                     </div>
                                                 </div>
 
