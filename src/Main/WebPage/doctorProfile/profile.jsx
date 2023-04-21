@@ -14,7 +14,7 @@ export const Profile = () => {
     
     const jsonSpecilistString = sessionStorage?.getItem("doctorSpecialist");
     const jsonTypeString = sessionStorage?.getItem("doctorType");
-    const initialData = jsonSpecilistString ? JSON.parse(jsonSpecilistString) : null;
+    const initialData = jsonSpecilistString ? JSON.parse(jsonSpecilistString) : JSON.parse(jsonTypeString);
     const [singleSpecialist, setSingleSpecialist] = useState(initialData);
     
     const [image, setDoctorImage] = useState()
@@ -127,10 +127,11 @@ export const Profile = () => {
                                                 <input value={doctorProfile?.qualification} type='text' name='qualification' onChange={getInput} />
                                             </div>
                                         </div>
+                                        
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorExperience">Experience</label>
-                                                <input value={doctorProfile?.experience} type='text' name='experience' onChange={getInput} />
+                                                <input value={doctorProfile?.experience} type='number' name='experience' onChange={getInput} />
                                             </div>
                                         </div>
                             

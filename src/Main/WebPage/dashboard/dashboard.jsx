@@ -13,17 +13,17 @@ export const Dashboard = () => {
   useEffect(() => {
     const userType = getStorageData();
     const doctorSpeciality = getDoctorData();
-
-    getSingleSpecialist(doctorSpeciality?.specialist_category).then((res) => {
-      setSingleSpecialist(sessionStorage?.setItem("doctorSpecialist", JSON.stringify(res?.data?.data[0])))
-    }).catch((res) => {
-      console.log(res)
-    })
     getDoctorSingle(userType?.id).then((res) => {
       setDoctorData(sessionStorage.setItem("doctorProfile", JSON.stringify(res?.data?.data[0])));
     }).catch((error) => {
       console.log(error)
     })
+    // getSingleSpecialist(doctorSpeciality?.specialist_category).then((res) => {
+    //   setSingleSpecialist(sessionStorage?.setItem("doctorSpecialist", JSON.stringify(res?.data?.data[0])))
+    // }).catch((res) => {
+    //   console.log(res)
+    // })
+  
   }, [singleSpecialist, docSessionData, doctorData])
 
   const Line1 = {

@@ -59,7 +59,7 @@ export const Login = () => {
                                     </Link>
                                 </div>
                                 <div className="fields">
-                                    <button type='submit' onSubmit={(e)=>{e.preventDefault()}}>
+                                    <button type='submit' >
                                         Sign In
                                     </button>
                                 </div>
