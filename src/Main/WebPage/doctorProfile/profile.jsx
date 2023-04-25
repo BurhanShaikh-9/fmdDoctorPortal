@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import profilePic from '../../../assets/images/guy.png'
 import DoctorService from '../../../services/doctorService';
 import sunImg from '../../../assets/images/sun1.png'
@@ -8,16 +8,16 @@ import TokenService from '../../../services/tokenService';
 export const Profile = () => {
     const [addTime, setAddTime] = useState([]);
     const { getDoctorData } = TokenService();
-    const { updateDoctor, getSpecialist, getSingleSpecialist } = DoctorService();
+    const { updateDoctor, getSpecialist, getSingleSpecialist, getDoctorType } = DoctorService();
     const [docSpecialist, setDoctorSpecialist] = useState([])
     let imageUrl = "http://fmd.arraydigitals.com"
-    
     const jsonSpecilistString = sessionStorage?.getItem("doctorSpecialist");
     const jsonTypeString = sessionStorage?.getItem("doctorType");
     const initialData = jsonSpecilistString ? JSON.parse(jsonSpecilistString) : JSON.parse(jsonTypeString);
     const [singleSpecialist, setSingleSpecialist] = useState(initialData);
-    
-    const [image, setDoctorImage] = useState()
+    const [image, setDoctorImage] = useState(null)
+    const [imageLocal, setDoctorImageLocal] = useState()
+    // console.log(imageLocal,"imageurl")
     //get the user data from Session Storage and store it in the useState;
     const [doctorData, setDoctorData] = useState(getDoctorData());
     //object of data which is set according to local storage;
@@ -29,6 +29,7 @@ export const Profile = () => {
         qualification: doctorData?.qualification,
         experience: doctorData?.experience,
         specialist_category: doctorData?.specialist_category,
+        doctor_type: doctorData?.doctor_type,
         pdma_id: doctorData?.PMDA_ID,
         cnic: doctorData?.CNIC,
         shift: doctorData?.availability,
@@ -50,18 +51,23 @@ export const Profile = () => {
         reader.readAsDataURL(file);
         reader.onload = () => {
             setDoctorImage(reader.result);
+            saveImageLocal(reader.result)
         };
     }
 
+    const saveImageLocal = imageData => {
+        sessionStorage.setItem("userImageLocal", imageData);
+    }
+
     const formSumbit = (e) => {
-        console.log(doctorProfile,"doctorProfile")
+        console.log(doctorProfile, "doctorProfile")
         e.preventDefault();
         //image sent in database
         const doctorSubmitData = { ...doctorProfile, image }
         console.log(doctorSubmitData)
         updateDoctor(doctorSubmitData).then((res) => {
             console.log(res)
-            const updatedDoctor = { ...doctorData, fullname: doctorProfile?.fullname, email: doctorProfile?.email, qualification: doctorProfile?.qualification, experience:doctorProfile?.experience , phone: doctorProfile?.phone, fee: doctorProfile?.fee, start_time:doctorProfile?.start_time, end_time:doctorProfile?.end_time, availability:doctorProfile?.shift}
+            const updatedDoctor = { ...doctorData, fullname: doctorProfile?.fullname, email: doctorProfile?.email, qualification: doctorProfile?.qualification, experience: doctorProfile?.experience, phone: doctorProfile?.phone, fee: doctorProfile?.fee, start_time: doctorProfile?.start_time, end_time: doctorProfile?.end_time, availability: doctorProfile?.shift, doctor_type: doctorProfile?.doctor_type }
             sessionStorage.setItem('doctorProfile', JSON.stringify(updatedDoctor));
             setDoctorData(updatedDoctor);
             // window.location.reload();
@@ -71,15 +77,30 @@ export const Profile = () => {
     }
 
     useEffect(() => {
+        if (doctorData?.specialist_category === null) {
+            getDoctorType().then((res) => {
+                setDoctorSpecialist(res?.data?.data)
+            }).catch((res) => {
+                console.log(res)
+            });
+        } else {
 
-        getSpecialist().then((res) => {
-            setDoctorSpecialist(res?.data?.data)
-        }).catch((res) => {
-            console.log(res)
-        });
 
+            getSpecialist().then((res) => {
+                setDoctorSpecialist(res?.data?.data)
+            }).catch((res) => {
+                console.log(res)
+            });
+        }
 
-    }, [])
+        setDoctorImageLocal(sessionStorage.getItem("userImageLocal"));
+
+    }, [imageLocal, docSpecialist])
+
+    // useLayoutEffect(()=>{
+    //     setDoctorImageLocal(sessionStorage.getItem("userImageLocal"));
+
+    // })
     return (
         <>
             <section className='mainSection'>
@@ -97,7 +118,8 @@ export const Profile = () => {
                                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                             <div className="fields">
                                                 <div className="profileImage">
-                                                    <img src={`${imageUrl}/${doctorData?.image}`} alt="" className='profileImage' onChange={getImageInput}/>
+                                                    {/* <img src={`${imageUrl}/${doctorData?.image}`} alt="" className='profileImage' onChange={getImageInput}/> */}
+                                                    <img src={imageLocal ? imageLocal : `${imageUrl}/${doctorData?.image}`} alt="" className='profileImage' onChange={getImageInput} />
                                                 </div>
                                             </div>
                                         </div>
@@ -127,14 +149,14 @@ export const Profile = () => {
                                                 <input value={doctorProfile?.qualification} type='text' name='qualification' onChange={getInput} />
                                             </div>
                                         </div>
-                                        
+
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorExperience">Experience</label>
                                                 <input value={doctorProfile?.experience} type='number' name='experience' onChange={getInput} />
                                             </div>
                                         </div>
-                            
+
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorPhone">Phone</label>
@@ -144,18 +166,32 @@ export const Profile = () => {
 
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
-                                                <label htmlFor="doctorName">Speciality</label>
+                                                <label htmlFor="doctorName"> {doctorData?.specialist_category === null ? "Doctor Type" : "Speciality"} </label>
                                                 {/* <input type="text" id='doctorName' value={doctorProfile?.specialist_category} name='specialist_category' placeholder='Enter Name...' onChange={getInput} /> */}
 
-                                                <select name="" id="">
-                                                    <option value={singleSpecialist?.id}>-- {singleSpecialist?.title} --</option>
-                                                    {docSpecialist?.map((item, keyId) => {
-                                                        return (
-                                                            <option value="" key={keyId}>{item?.title}</option>
-                                                        )
-                                                    })
-                                                    }
-                                                </select>
+                                                {
+                                                    doctorData?.specialist_category === null ?
+
+                                                        <select name="doctor_type" id="" onChange={getInput}>
+                                                            <option value={singleSpecialist?.id}>-- {singleSpecialist?.title} --</option>
+                                                            {docSpecialist?.map((item, keyId) => {
+                                                                return (
+                                                                    <option value={item?.id} key={keyId}>{item?.title}</option>
+                                                                )
+                                                            })
+                                                            }
+                                                        </select>
+                                                        :
+                                                        <select name="specialist_category" id="" onChange={getInput}>
+                                                            <option value={singleSpecialist?.id}>-- {singleSpecialist?.title} --</option>
+                                                            {docSpecialist?.map((item, keyId) => {
+                                                                return (
+                                                                    <option value="" key={keyId}>{item?.title}</option>
+                                                                )
+                                                            })
+                                                            }
+                                                        </select>
+                                                }
                                             </div>
                                         </div>
 
@@ -170,7 +206,7 @@ export const Profile = () => {
                                             </div>
                                         </div>
 
-                                       
+
 
                                         {/* {
                                                 addDesc.map((item, keyId) => ( */}
@@ -196,14 +232,14 @@ export const Profile = () => {
                                                             <img src={sunImg} alt="" />
                                                             <label htmlFor="doctorDayAvailability">Day</label>
                                                         </div>
-                                                        <input type="radio" id="doctorDayAvailability" value="Day"  name='shift' onChange={getInput} />
+                                                        <input type="radio" id="doctorDayAvailability" value="Day" name='shift' onChange={getInput} />
                                                     </div>
                                                     <div className="availInner">
                                                         <div className="labelDiv">
                                                             <img className='moon' src={moonImg} alt="" />
                                                             <label htmlFor="doctorNightAvailability">Night</label>
                                                         </div>
-                                                        <input type="radio" name='shift' value="Night"  id='doctorNightAvailability' onChange={getInput} />
+                                                        <input type="radio" name='shift' value="Night" id='doctorNightAvailability' onChange={getInput} />
                                                     </div>
                                                 </div>
 

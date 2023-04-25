@@ -65,8 +65,15 @@ const DoctorService = () => {
         };
         return axios.request(config)
     }
-
-    return { getDoctorSingle, updateDoctor, getAppointment, getSpecialist, getSingleSpecialist, getSingleType}
+    const getDoctorType = () => {
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `${baseUrl}/doctor-types/`,
+        };
+        return axios.request(config)
+    }
+    return { getDoctorSingle, updateDoctor, getAppointment, getSpecialist, getSingleSpecialist, getSingleType, getDoctorType}
 }
 
 export default DoctorService

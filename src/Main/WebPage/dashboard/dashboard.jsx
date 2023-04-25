@@ -4,10 +4,11 @@ import DoctorService from '../../../services/doctorService';
 import TokenService from '../../../services/tokenService';
 
 export const Dashboard = () => {
-  const { getDoctorSingle, updateDoctor, getSpecialist, getSingleSpecialist } = DoctorService();
+  const { getDoctorSingle, updateDoctor, getSpecialist, getSingleSpecialist, getSingleType } = DoctorService();
   const { getStorageData, getDoctorData } = TokenService();
   const [doctorData, setDoctorData] = useState({});
   const [singleSpecialist, setSingleSpecialist] = useState({})
+  const [singleDoctorType, setSingleDoctorType] = useState({})
   const [docSessionData, setDocSessionData] = useState()
   
   useEffect(() => {
@@ -18,13 +19,21 @@ export const Dashboard = () => {
     }).catch((error) => {
       console.log(error)
     })
-    // getSingleSpecialist(doctorSpeciality?.specialist_category).then((res) => {
-    //   setSingleSpecialist(sessionStorage?.setItem("doctorSpecialist", JSON.stringify(res?.data?.data[0])))
-    // }).catch((res) => {
-    //   console.log(res)
-    // })
+
+    if(doctorSpeciality?.specialist_category == null){
+      getSingleType(doctorSpeciality?.doctor_type).then((res)=>{
+        setSingleDoctorType(sessionStorage?.setItem("doctorType", JSON.stringify(res?.data?.data[0])))
+      })
+    }else{
+
+      getSingleSpecialist(doctorSpeciality?.specialist_category).then((res) => {
+        setSingleSpecialist(sessionStorage?.setItem("doctorSpecialist", JSON.stringify(res?.data?.data[0])))
+      }).catch((res) => {
+        console.log(res)
+      })
+    }
   
-  }, [singleSpecialist, docSessionData, doctorData])
+  }, [singleSpecialist, docSessionData, doctorData, singleDoctorType])
 
   const Line1 = {
     chart: {
