@@ -37,7 +37,11 @@ const DoctorService = () => {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: `${baseUrl}/appointment-doctor/76`,
+            url: `${baseUrl}/appointments/doctor/${doctorId}`,
+            headers: {
+                'Authorization': `Bearer ${newToken}`,
+                'Content-Type': 'application/json'
+            }
         };
         return axios.request(config)
     }

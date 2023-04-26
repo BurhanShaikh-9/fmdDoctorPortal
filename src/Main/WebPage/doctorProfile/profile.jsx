@@ -33,6 +33,7 @@ export const Profile = () => {
         pdma_id: doctorData?.PMDA_ID,
         cnic: doctorData?.CNIC,
         shift: doctorData?.availability,
+        consultation: doctorData?.consultation,
         fee: doctorData?.fee,
         start_time: doctorData?.start_time,
         end_time: doctorData?.end_time,
@@ -67,7 +68,19 @@ export const Profile = () => {
         console.log(doctorSubmitData)
         updateDoctor(doctorSubmitData).then((res) => {
             console.log(res)
-            const updatedDoctor = { ...doctorData, fullname: doctorProfile?.fullname, email: doctorProfile?.email, qualification: doctorProfile?.qualification, experience: doctorProfile?.experience, phone: doctorProfile?.phone, fee: doctorProfile?.fee, start_time: doctorProfile?.start_time, end_time: doctorProfile?.end_time, availability: doctorProfile?.shift, doctor_type: doctorProfile?.doctor_type }
+            const updatedDoctor = { ...doctorData, 
+                fullname: doctorProfile?.fullname, 
+                email: doctorProfile?.email, 
+                qualification: doctorProfile?.qualification, 
+                experience: doctorProfile?.experience, 
+                phone: doctorProfile?.phone, 
+                fee: doctorProfile?.fee, 
+                start_time: doctorProfile?.start_time, 
+                end_time: doctorProfile?.end_time, 
+                availability: doctorProfile?.shift, 
+                doctor_type: doctorProfile?.doctor_type,
+                consultation:doctorProfile?.consultation, 
+                specialist_category:doctorProfile?.specialist_category }
             sessionStorage.setItem('doctorProfile', JSON.stringify(updatedDoctor));
             setDoctorData(updatedDoctor);
             // window.location.reload();
@@ -84,8 +97,6 @@ export const Profile = () => {
                 console.log(res)
             });
         } else {
-
-
             getSpecialist().then((res) => {
                 setDoctorSpecialist(res?.data?.data)
             }).catch((res) => {
@@ -173,7 +184,7 @@ export const Profile = () => {
                                                     doctorData?.specialist_category === null ?
 
                                                         <select name="doctor_type" id="" onChange={getInput}>
-                                                            <option value={singleSpecialist?.id}>-- {singleSpecialist?.title} --</option>
+                                                            <option value={singleSpecialist?.id}> -Update Your Type - {singleSpecialist?.title}</option>
                                                             {docSpecialist?.map((item, keyId) => {
                                                                 return (
                                                                     <option value={item?.id} key={keyId}>{item?.title}</option>
@@ -183,10 +194,10 @@ export const Profile = () => {
                                                         </select>
                                                         :
                                                         <select name="specialist_category" id="" onChange={getInput}>
-                                                            <option value={singleSpecialist?.id}>-- {singleSpecialist?.title} --</option>
+                                                            <option value={singleSpecialist?.id}>- Update Your speciality - {singleSpecialist?.title}</option>
                                                             {docSpecialist?.map((item, keyId) => {
                                                                 return (
-                                                                    <option value="" key={keyId}>{item?.title}</option>
+                                                                    <option value={item?.id} key={keyId}>{item?.title}</option>
                                                                 )
                                                             })
                                                             }
