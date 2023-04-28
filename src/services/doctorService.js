@@ -47,7 +47,7 @@ const DoctorService = () => {
     }
     const getSpecialist = () => {
         let config = {
-            method: 'get',
+            method: 'get',  
             maxBodyLength: Infinity,
             url: `${baseUrl}/specialist-categories`,
         };
