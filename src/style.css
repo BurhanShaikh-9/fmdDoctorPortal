@@ -349,6 +349,7 @@ header .headerInner .menuButton i {
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields input[type=number],
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields input[type=file],
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields input[type=time],
+.mainSection .mainSectionWrapper .cardForm .additionForm .fields input[type=date],
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields select {
   width: 100%;
   border: 1px solid rgb(219, 219, 219);
@@ -361,6 +362,7 @@ header .headerInner .menuButton i {
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields input[type=number]:focus,
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields input[type=file]:focus,
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields input[type=time]:focus,
+.mainSection .mainSectionWrapper .cardForm .additionForm .fields input[type=date]:focus,
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields select:focus {
   outline: #EB5757;
 }

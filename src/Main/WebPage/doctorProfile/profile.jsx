@@ -4,6 +4,7 @@ import DoctorService from '../../../services/doctorService';
 import sunImg from '../../../assets/images/sun1.png'
 import moonImg from '../../../assets/images/moon.png'
 import TokenService from '../../../services/tokenService';
+import Select from 'react-select';
 
 export const Profile = () => {
     const [addTime, setAddTime] = useState([]);
@@ -68,19 +69,21 @@ export const Profile = () => {
         console.log(doctorSubmitData)
         updateDoctor(doctorSubmitData).then((res) => {
             console.log(res)
-            const updatedDoctor = { ...doctorData, 
-                fullname: doctorProfile?.fullname, 
-                email: doctorProfile?.email, 
-                qualification: doctorProfile?.qualification, 
-                experience: doctorProfile?.experience, 
-                phone: doctorProfile?.phone, 
-                fee: doctorProfile?.fee, 
-                start_time: doctorProfile?.start_time, 
-                end_time: doctorProfile?.end_time, 
-                availability: doctorProfile?.shift, 
+            const updatedDoctor = {
+                ...doctorData,
+                fullname: doctorProfile?.fullname,
+                email: doctorProfile?.email,
+                qualification: doctorProfile?.qualification,
+                experience: doctorProfile?.experience,
+                phone: doctorProfile?.phone,
+                fee: doctorProfile?.fee,
+                start_time: doctorProfile?.start_time,
+                end_time: doctorProfile?.end_time,
+                availability: doctorProfile?.shift,
                 doctor_type: doctorProfile?.doctor_type,
-                consultation:doctorProfile?.consultation, 
-                specialist_category:doctorProfile?.specialist_category }
+                consultation: doctorProfile?.consultation,
+                specialist_category: doctorProfile?.specialist_category
+            }
             sessionStorage.setItem('doctorProfile', JSON.stringify(updatedDoctor));
             setDoctorData(updatedDoctor);
             // window.location.reload();
@@ -108,10 +111,25 @@ export const Profile = () => {
 
     }, [imageLocal, docSpecialist])
 
-    // useLayoutEffect(()=>{
-    //     setDoctorImageLocal(sessionStorage.getItem("userImageLocal"));
+    const days = [
+        { value: 'monday', label: 'Monday' },
+        { value: 'tuesday', label: 'Tuesday' },
+        { value: 'wednesday', label: 'Wednesday' },
+        { value: 'thursday', label: 'Thursday' },
+        { value: 'friday', label: 'Friday' },
+        { value: 'saturday', label: 'Saturday' },
+        { value: 'sunday', label: 'Sunday' },
+    ];
 
-    // })
+
+    const [selectedDays, setSelectedDays] = useState([]);
+
+    const handleDayChange = (selectedOptions) => {
+        setSelectedDays(selectedOptions);
+    };
+
+    const selectedValues = selectedDays.map((day) => day.value);
+
     return (
         <>
             <section className='mainSection'>
@@ -236,57 +254,19 @@ export const Profile = () => {
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
-                                                <label htmlFor="doctorDayAvailability">Availability</label>
-                                                <div className='availOuter'>
-                                                    <div className="availInner">
-                                                        <div className="labelDiv">
-                                                            <img src={sunImg} alt="" />
-                                                            <label htmlFor="doctorDayAvailability">Day</label>
-                                                        </div>
-                                                        <input type="radio" id="doctorDayAvailability" value="Day" name='shift' onChange={getInput} />
-                                                    </div>
-                                                    <div className="availInner">
-                                                        <div className="labelDiv">
-                                                            <img className='moon' src={moonImg} alt="" />
-                                                            <label htmlFor="doctorNightAvailability">Night</label>
-                                                        </div>
-                                                        <input type="radio" name='shift' value="Night" id='doctorNightAvailability' onChange={getInput} />
-                                                    </div>
-                                                </div>
-
+                                                <label htmlFor="time">Doctor Days</label>
+                                                {/* <input type="week" id="doctorDayAvailability" value={doctorProfile?.shift} name='shift' onChange={getInput} /> */}
+                                                <Select
+                                                    value={selectedDays}
+                                                    onChange={handleDayChange}
+                                                    options={days}
+                                                    isMulti
+                                                    placeholder="Select days"
+                                                />
                                             </div>
                                         </div>
-                                        {/* ))
-                                            }
-                                            <div className="addMoreButton">
-                                                {addDesc.length >= 2 &&
-                                                    <button onClick={handleServiceDelete}>remove</button>
-                                                }
-                                                {addDesc.length <= 4 &&
-                                                    <button onClick={handleAddMoreClick}>Add More</button>
-                                                }
-                                            </div> */}
 
-                                        {/* <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
-                                            <div className="fields">
-                                                <label htmlFor="endTime">Shift</label>
-                                           
-                                                <select value={doctorData?.availability} >
-                                                    {doctorData?.availability === "day" ?
-                                                        <>
-                                                            <option value="day">Day</option>
-                                                            <option value="night">Night</option>
-                                                        </>
-                                                        :
-                                                        <>
-                                                            <option value="night">Night</option>
-                                                            <option value="day">Day</option>
-                                                        </>
-                                                    }
 
-                                                </select>
-                                            </div>
-                                        </div> */}
 
                                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                             <div className="fields">
