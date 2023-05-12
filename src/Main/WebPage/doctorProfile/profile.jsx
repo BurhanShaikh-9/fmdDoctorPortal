@@ -9,13 +9,16 @@ import Select from 'react-select';
 export const Profile = () => {
     const [addTime, setAddTime] = useState([]);
     const { getDoctorData } = TokenService();
-    const { updateDoctor, getSpecialist, getSingleSpecialist, getDoctorType } = DoctorService();
+    const { updateDoctor, getSpecialist, getSingleSpecialist,getSingleType, getDoctorType } = DoctorService();
     const [docSpecialist, setDoctorSpecialist] = useState([])
     let imageUrl = "http://fmd.arraydigitals.com"
-    const jsonSpecilistString = sessionStorage?.getItem("doctorSpecialist");
-    const jsonTypeString = sessionStorage?.getItem("doctorType");
-    const initialData = jsonSpecilistString ? JSON.parse(jsonSpecilistString) : JSON.parse(jsonTypeString);
-    const [singleSpecialist, setSingleSpecialist] = useState(initialData);
+    // const jsonSpecilistString = sessionStorage?.getItem("doctorSpecialist");
+    // const jsonTypeString = sessionStorage?.getItem("doctorType");
+    // console.log(jsonTypeString, "Dfsgagda")
+    // const initialData = jsonSpecilistString ? JSON.parse(jsonSpecilistString) : JSON.parse(jsonTypeString);
+    // const [singleSpecialist, setSingleSpecialist] = useState(initialData);
+    const [singleSpecialist, setSingleSpecialist] = useState()
+    const [singleDoctorType, setSingleDoctorType] = useState()
     const [image, setDoctorImage] = useState(null)
     const [imageLocal, setDoctorImageLocal] = useState()
     // console.log(imageLocal,"imageurl")
@@ -33,7 +36,7 @@ export const Profile = () => {
         doctor_type: doctorData?.doctor_type,
         pdma_id: doctorData?.PMDA_ID,
         cnic: doctorData?.CNIC,
-        shift: doctorData?.availability,
+        // shift: doctorData?.availability,
         consultation: doctorData?.consultation,
         fee: doctorData?.fee,
         start_time: doctorData?.start_time,
@@ -61,12 +64,46 @@ export const Profile = () => {
         sessionStorage.setItem("userImageLocal", imageData);
     }
 
+    useEffect(() => {
+        getSingleSpecialist(doctorData?.specialist_category).then((res) => {
+            setSingleSpecialist(res?.data?.data[0]?.title)
+            // console.log(res?.data?.data[0]?.title, "niggaaa")
+        }).catch((res) => {
+            console.log(res)
+        })
+        getSingleType(doctorData?.doctor_type).then((res)=>{
+            setSingleDoctorType(res?.data?.data[0]?.title)
+        }).catch((res)=>{
+            console.log(res)
+        })
+    },[singleSpecialist, singleDoctorType])
+
+    const days = [
+        { value: 'monday', label: 'Monday' },
+        { value: 'tuesday', label: 'Tuesday' },
+        { value: 'wednesday', label: 'Wednesday' },
+        { value: 'thursday', label: 'Thursday' },
+        { value: 'friday', label: 'Friday' },
+        { value: 'saturday', label: 'Saturday' },
+        { value: 'sunday', label: 'Sunday' },
+    ];
+
+
+    const [selectedDays, setSelectedDays] = useState([]);
+
+    const handleDayChange = (selectedOptions) => {
+        setSelectedDays(selectedOptions);
+    };
+    const selectedValues = selectedDays.map((day) => day.value);
+
+
+
     const formSumbit = (e) => {
         console.log(doctorProfile, "doctorProfile")
         e.preventDefault();
         //image sent in database
-        const doctorSubmitData = { ...doctorProfile, image }
-        console.log(doctorSubmitData)
+        const doctorSubmitData = { ...doctorProfile, image, shift: selectedValues.toString() }
+        console.log(doctorSubmitData, "vjsabvsuiv")
         updateDoctor(doctorSubmitData).then((res) => {
             console.log(res)
             const updatedDoctor = {
@@ -79,10 +116,11 @@ export const Profile = () => {
                 fee: doctorProfile?.fee,
                 start_time: doctorProfile?.start_time,
                 end_time: doctorProfile?.end_time,
-                availability: doctorProfile?.shift,
+                availability: selectedValues?.toString(),
                 doctor_type: doctorProfile?.doctor_type,
                 consultation: doctorProfile?.consultation,
-                specialist_category: doctorProfile?.specialist_category
+                specialist_category: doctorProfile?.specialist_category,
+                doctorDays: selectedValues,
             }
             sessionStorage.setItem('doctorProfile', JSON.stringify(updatedDoctor));
             setDoctorData(updatedDoctor);
@@ -110,25 +148,6 @@ export const Profile = () => {
         setDoctorImageLocal(sessionStorage.getItem("userImageLocal"));
 
     }, [imageLocal, docSpecialist])
-
-    const days = [
-        { value: 'monday', label: 'Monday' },
-        { value: 'tuesday', label: 'Tuesday' },
-        { value: 'wednesday', label: 'Wednesday' },
-        { value: 'thursday', label: 'Thursday' },
-        { value: 'friday', label: 'Friday' },
-        { value: 'saturday', label: 'Saturday' },
-        { value: 'sunday', label: 'Sunday' },
-    ];
-
-
-    const [selectedDays, setSelectedDays] = useState([]);
-
-    const handleDayChange = (selectedOptions) => {
-        setSelectedDays(selectedOptions);
-    };
-
-    const selectedValues = selectedDays.map((day) => day.value);
 
     return (
         <>
@@ -162,7 +181,8 @@ export const Profile = () => {
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
                                                 <label htmlFor="doctorName">Name</label>
-                                                <input type='text' name='fullname' value={doctorProfile?.fullname} onChange={getInput} />
+                                                {/* <input type='text' name='fullname' value={doctorProfile?.fullname} onChange={getInput} /> */}
+                                                <p className='Fixed'>{doctorProfile?.fullname}</p>
                                             </div>
                                         </div>
 
@@ -198,7 +218,7 @@ export const Profile = () => {
                                                 <label htmlFor="doctorName"> {doctorData?.specialist_category === null ? "Doctor Type" : "Speciality"} </label>
                                                 {/* <input type="text" id='doctorName' value={doctorProfile?.specialist_category} name='specialist_category' placeholder='Enter Name...' onChange={getInput} /> */}
 
-                                                {
+                                                {/* {
                                                     doctorData?.specialist_category === null ?
 
                                                         <select name="doctor_type" id="" onChange={getInput}>
@@ -210,6 +230,7 @@ export const Profile = () => {
                                                             })
                                                             }
                                                         </select>
+                                                      
                                                         :
                                                         <select name="specialist_category" id="" onChange={getInput}>
                                                             <option value={singleSpecialist?.id}>- Update Your speciality - {singleSpecialist?.title}</option>
@@ -220,6 +241,16 @@ export const Profile = () => {
                                                             })
                                                             }
                                                         </select>
+                                                  
+                                                } */}
+                                                {
+                                                    doctorData?.specialist_category === null ?
+
+                                                        <p className='Fixed'> {singleDoctorType} </p>
+
+                                                        :
+                                                        <p className='Fixed'> {singleSpecialist} </p>
+
                                                 }
                                             </div>
                                         </div>
@@ -254,7 +285,15 @@ export const Profile = () => {
                                         </div>
                                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
                                             <div className="fields">
-                                                <label htmlFor="time">Doctor Days</label>
+                                                <label htmlFor="workDays">Working Days</label>
+                                                <p className='workDays'>
+                                                    {doctorData?.availability}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                            <div className="fields">
+                                                <label htmlFor="time">Update Working Days</label>
                                                 {/* <input type="week" id="doctorDayAvailability" value={doctorProfile?.shift} name='shift' onChange={getInput} /> */}
                                                 <Select
                                                     value={selectedDays}
@@ -265,9 +304,6 @@ export const Profile = () => {
                                                 />
                                             </div>
                                         </div>
-
-
-
                                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
                                             <div className="fields">
                                                 <button type='Submit' >Save</button>
