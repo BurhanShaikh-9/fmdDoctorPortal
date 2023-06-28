@@ -77,66 +77,7 @@ export const Appointment = () => {
                               </a>
                             )
                           })}
-
-                          {/* <a className="list-group-item list-group-item-action">
-                            <div className="rewardList">
-
-                              <div className=" w-100">
-                                <h5 className="mb-1">Patient Name</h5>
-                                <p className="mb-1">Booking Details comes here</p>
-                              </div>
-                            </div>
-                            <small>10:10 - 04/04/2022</small>
-                            <div className="metaDatasDiv">
-                              <div>
-                                <p className="metaData"> Appointment Type: Online</p>
-                              </div>
-                              <div>
-                                <p className="metaData"> Location: Karachi</p>
-                              </div>
-                              <div>
-                                <p className="metaData"> Payment Details: Cash</p>
-                              </div>
-                              <div>
-                                <p className="metaData"> Price: 1200 Rs</p>
-                              </div>
-                            </div>
-                            <div className="metaButtons">
-                              <button className="viewButton" onClick={handleNavigate}>View</button>
-                              <button className="acceptButton">Accept</button>
-                              <button className="rejectButton">Reject</button>
-                            </div>
-                          </a>
-                          <a className="list-group-item list-group-item-action">
-                            <div className="rewardList">
-
-                              <div className=" w-100">
-                                <h5 className="mb-1">Patient Name</h5>
-                                <p className="mb-1">Booking Details comes here</p>
-                              </div>
-                            </div>
-                            <small>10:10 - 04/04/2022</small>
-                            <div className="metaDatasDiv">
-                              <div>
-                                <p className="metaData"> Appointment Type: Online</p>
-                              </div>
-                              <div>
-                                <p className="metaData"> Location: Karachi</p>
-                              </div>
-                              <div>
-                                <p className="metaData"> Payment Details: Cash</p>
-                              </div>
-                              <div>
-                                <p className="metaData"> Price: 1200 Rs</p>
-                              </div>
-                            </div>
-                            <div className="metaButtons">
-                              <button className="viewButton" onClick={handleNavigate}>View</button>
-                              <button className="acceptButton">Accept</button>
-                              <button className="rejectButton">Reject</button>
-                            </div>
-                          </a> */}
-
+                          
                         </div>
                       </div>
                       <div className="panel" id="two-panel">
