@@ -6,6 +6,8 @@ export const ROUTES = {
     TOTALPROFIT:"Report-profit",
     SALES:"report-sales",
     PROFILE:"profile",
+    FAQS:"faqs",
+    TERMS:"terms_&_condition",
     APPOINTMENT_DETAILS:"/appointment-details",
 }
 

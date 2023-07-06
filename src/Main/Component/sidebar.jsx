@@ -60,13 +60,13 @@ export const Sidebar = () => {
                             <ul id="charts-nav1" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                                 <li>
                                     <NavLink to={ROUTES.SALES} className="navLinkB " activeclassname="active">
-                                        <span>Sales</span>
+                                        <span>Completed Orders</span>
 
                                     </NavLink >
                                 </li>
                                 <li>
                                     <NavLink to={ROUTES.TOTALPROFIT} className="navLinkC " activeclassname="active">
-                                        <span>Total Profit</span>
+                                        <span>Remaining Orders</span>
                                     </NavLink >
                                 </li>
                             </ul>

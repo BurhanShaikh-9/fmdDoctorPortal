@@ -53,6 +53,17 @@ a {
   background-color: #fff;
 }
 
+.notificationMenu .notificationItem {
+  width: 200px;
+  margin-bottom: 15px;
+}
+.notificationMenu .notificationItem .notificationHeading {
+  font-weight: 600;
+}
+.notificationMenu .dropdown-item {
+  white-space: normal;
+}
+
 .sidebarwidth {
   width: 0;
   display: none;
@@ -309,6 +320,35 @@ header .headerInner .menuButton i {
 .mainSection .mainSectionWrapper .cardForm {
   width: 90%;
 }
+.mainSection .mainSectionWrapper .cardForm .tableSearch2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.mainSection .mainSectionWrapper .cardForm .tableSearch2 .tableInnerHeading {
+  font-size: 25px;
+  color: #eb5757;
+  font-weight: 600;
+}
+.mainSection .mainSectionWrapper .cardForm .tableSearch2 input {
+  border: 1px solid grey;
+  padding: 5px;
+  border-radius: 10px;
+}
+.mainSection .mainSectionWrapper .cardForm .tableSearch {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.mainSection .mainSectionWrapper .cardForm .tableSearch input {
+  border: 1px solid grey;
+  padding: 5px;
+  border-radius: 10px;
+}
 .mainSection .mainSectionWrapper .cardForm .additionForm .addMoreButton {
   display: flex;
   justify-content: flex-end;
@@ -476,6 +516,37 @@ header .headerInner .menuButton i {
 }
 .mainSection .mainSectionWrapper .cardForm .additionForm .fields .toggleButton .slider.round:before {
   border-radius: 50%;
+}
+.mainSection .mainSectionWrapper .cardForm th {
+  white-space: nowrap;
+}
+.mainSection .mainSectionWrapper .cardForm td {
+  white-space: nowrap;
+}
+.mainSection .mainSectionWrapper .cardForm .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 50px;
+}
+.mainSection .mainSectionWrapper .cardForm .pagination .previous a {
+  background-color: rgb(236, 236, 236);
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: #eb5757;
+}
+.mainSection .mainSectionWrapper .cardForm .pagination .next a {
+  background-color: rgb(236, 236, 236);
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: #eb5757;
+}
+.mainSection .mainSectionWrapper .cardForm .pagination .active a {
+  background-color: rgb(236, 236, 236);
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: #eb5757;
 }
 .mainSection .mainSectionWrapper .cardForm .chart .chartHeading p {
   font-size: 20px;

@@ -13,6 +13,8 @@ import { Login } from './Main/WebPage/login';
 import TokenService from './services/tokenService';
 import { AppointmentDetails } from './Main/WebPage/appointment/appointmentDetails';
 import DoctorService from './services/doctorService';
+import { Faqs } from './Main/WebPage/FAQS/faqs';
+import { TermsAndCondition } from './Main/WebPage/termsCondition/termsAndCondition';
 // import { Page404 } from './Main/Component/page404';
 
 export const SidebarContext = createContext({ sideBar: false, setSideBar: () => { } })
@@ -45,7 +47,10 @@ function App() {
                 <Route path={ROUTES.TOTALPROFIT} element={< TotalProfile />} />
                 <Route path={ROUTES.SALES} element={< Sales />} />
                 <Route path={ROUTES.PROFILE} element={< Profile />} />
-                <Route path={ROUTES.APPOINTMENT_DETAILS} element={<AppointmentDetails />}></Route>
+                <Route path={ROUTES.FAQS} element={< Faqs />} />
+                <Route path={ROUTES.TERMS} element={< TermsAndCondition />} />
+                <Route path={ROUTES.APPOINTMENT_DETAILS} element={<AppointmentDetails />}/>
+                
               </Route>
             </Routes>
           </div>

@@ -69,6 +69,20 @@ a {
   background-color: #fff;
 }
 
+.notificationMenu{
+ 
+  .notificationItem{
+    width: 200px;
+    margin-bottom: 15px;
+    .notificationHeading{
+      font-weight: 600;
+    }
+  }
+  .dropdown-item{
+    white-space:normal;
+  }
+}
+
 .sidebarwidth {
   width: 0;
   display: none;
@@ -375,6 +389,35 @@ header {
     .cardForm {
       width: 90%;
 
+      .tableSearch2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        row-gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        .tableInnerHeading {
+          font-size: 25px;
+          color: #eb5757;
+          font-weight: 600;
+        }
+        input {
+          border: 1px solid grey;
+          padding: 5px;
+          border-radius: 10px;
+        }
+      }
+      .tableSearch {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 10px;
+        input {
+          border: 1px solid grey;
+          padding: 5px;
+          border-radius: 10px;
+        }
+      }
       .additionForm {
         .addMoreButton {
           display: flex;
@@ -562,6 +605,50 @@ header {
           }
         }
       }
+
+      th {
+        white-space: nowrap;
+      }
+
+      td {
+        white-space: nowrap;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 50px;
+
+        .previous {
+          a {
+            background-color: rgb(236, 236, 236);
+            padding: 5px 10px;
+            border-radius: 8px;
+            color: #eb5757;
+          }
+        }
+
+        .next {
+          a {
+            background-color: rgb(236, 236, 236);
+            padding: 5px 10px;
+            border-radius: 8px;
+            color: #eb5757;
+          }
+        }
+
+        .active {
+          a {
+            background-color: rgb(236, 236, 236);
+            padding: 5px 10px;
+            border-radius: 8px;
+            color: #eb5757;
+          }
+        }
+      }
+
 
       .chart {
         .chartHeading {
