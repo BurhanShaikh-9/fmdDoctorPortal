@@ -2,10 +2,11 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { ROUTES } from '../../../utils/Routes';
 import DoctorService from '../../../services/doctorService';
+import dataNotFound from '../../../assets/images/noData.png'
 
 export const Appointment = () => {
   const { getAppointment } = DoctorService();
-  
+
   const navigate = useNavigate();
   const [appointmentData, setAppointmentData] = useState();
   useLayoutEffect(() => {
@@ -44,40 +45,51 @@ export const Appointment = () => {
                     <div className="panels">
                       <div className="panel" id="one-panel">
                         <div className="list-group">
-                          {appointmentData?.map((item, keyid) => {
-                            return (
-                              <a className="list-group-item list-group-item-action">
-                                <div className="rewardList">
 
-                                  <div className=" w-100">
-                                    <h5 className="mb-1">{item?.fullname}</h5>
-                                    {/* <p className="mb-1">Booking Details comes here</p> */}
-                                  </div>
-                                </div>
-                                <small>{item?.date_time}</small>
-                                <div className="metaDatasDiv">
-                                  <div>
-                                    <p className="metaData"> Appointment Type: {item.consultation_type}</p>
-                                  </div>
-                                  <div>
-                                    <p className="metaData"> Location: {item?.address}</p>
-                                  </div>
-                                  <div>
-                                    <p className="metaData"> Payment Details: Cash</p>
-                                  </div>
-                                  <div>
-                                    <p className="metaData"> Price: {item?.amount} Rs</p>
-                                  </div>
-                                </div>
-                                <div className="metaButtons">
-                                  <button className="viewButton" onClick={handleNavigate}>View</button>
-                                  <button className="acceptButton">Accept</button>
-                                  <button className="rejectButton">Reject</button>
-                                </div>
-                              </a>
-                            )
-                          })}
-                          
+                          {appointmentData ?
+                            <>
+                              {appointmentData?.map((item, keyid) => {
+                                return (
+                                  <a className="list-group-item list-group-item-action">
+                                    <div className="rewardList">
+
+                                      <div className=" w-100">
+                                        <h5 className="mb-1">{item?.fullname}</h5>
+                                        {/* <p className="mb-1">Booking Details comes here</p> */}
+                                      </div>
+                                    </div>
+                                    <small>{item?.date_time}</small>
+                                    <div className="metaDatasDiv">
+                                      <div>
+                                        <p className="metaData"> Appointment Type: {item.consultation_type}</p>
+                                      </div>
+                                      <div>
+                                        <p className="metaData"> Location: {item?.address}</p>
+                                      </div>
+                                      <div>
+                                        <p className="metaData"> Payment Details: Cash</p>
+                                      </div>
+                                      <div>
+                                        <p className="metaData"> Price: {item?.amount} Rs</p>
+                                      </div>
+                                    </div>
+                                    <div className="metaButtons">
+                                      <button className="viewButton" onClick={handleNavigate}>View</button>
+                                      <button className="acceptButton">Accept</button>
+                                      <button className="rejectButton">Reject</button>
+                                    </div>
+                                  </a>
+                                )
+                              })}
+                            </>
+
+                            :
+                            <div className="dataNotFoundDiv">
+                              <img className='dataNotFoundImg' src={dataNotFound} alt="" />
+                            </div>
+
+                          }
+
                         </div>
                       </div>
                       <div className="panel" id="two-panel">
@@ -109,7 +121,7 @@ export const Appointment = () => {
                             <div className="metaButtons">
                               <button className="viewButton" onClick={handleNavigate}>View</button>
                               <button className="acceptButton" >Accepted</button>
-                            
+
                             </div>
                           </a>
                           <a className="list-group-item list-group-item-action">
@@ -137,7 +149,7 @@ export const Appointment = () => {
                             </div>
                             <div className="metaButtons">
                               <button className="viewButton" onClick={handleNavigate}>View</button>
-               
+
                               <button className="rejectButton">Rejected</button>
                             </div>
                           </a>
@@ -167,7 +179,7 @@ export const Appointment = () => {
                             <div className="metaButtons">
                               <button className="viewButton" onClick={handleNavigate}>View</button>
                               <button className="acceptButton">Accepted</button>
-                           
+
                             </div>
                           </a>
 

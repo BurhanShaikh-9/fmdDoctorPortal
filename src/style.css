@@ -70,6 +70,15 @@ a {
   transition: all 0.3s;
 }
 
+.dataNotFoundDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dataNotFoundDiv .dataNotFoundImg {
+  width: 400px;
+}
+
 .sideBarInner {
   overflow-x: hidden;
   position: relative;
