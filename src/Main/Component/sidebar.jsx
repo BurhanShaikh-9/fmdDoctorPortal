@@ -71,11 +71,6 @@ export const Sidebar = () => {
                                 </li>
                             </ul>
                         </li>
-                        {/* <li className="nav-item">
-                            <NavLink className="nav-link  collapsed" activeclassname="active" to={ROUTES.APPOINTMENT}>
-                                <i className="bi bi-person-lines-fill sideIcon" /><span>Reports</span>
-                            </NavLink>
-                        </li> */}
                     </ul>
                 </div>
             </aside>
